@@ -1,115 +1,111 @@
+require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 
 const app = express();
-app.use(cors());
+
+// Middleware
 app.use(express.json());
+app.use(cors());
 
-// Connect to MongoDB
-mongoose.connect('mongodb://127.0.0.1:27017/gozak_appointments')
-  .then(() => console.log('MongoDB connected successfully!'))
-  .catch(err => console.error('MongoDB connection error:', err));
+// MongoDB Connection
+const MONGO_URI = process.env.MONGO_URI || 'mongodb://localhost:27017/gozak_db';
+const PORT = process.env.PORT || 5001;
 
-// --- SCHEMAS & MODELS ---
-const BookingSchema = new mongoose.Schema({}, { strict: false });
-const Booking = mongoose.model('Booking', BookingSchema);
+mongoose
+  .connect(MONGO_URI)
+  .then(() => console.log('MongoDB connected successfully'))
+  .catch((err) => console.error('MongoDB connection error:', err));
 
-const UserSchema = new mongoose.Schema({
-  email: { type: String, required: true, unique: true },
-  password: { type: String, required: true }
+// User Schema & Model
+const userSchema = new mongoose.Schema(
+  {
+    name: { type: String, required: false },
+    email: { type: String, required: true, unique: true },
+    password: { type: String, required: true },
+  },
+  { timestamps: true }
+);
+
+// Password verification method
+userSchema.methods.matchPassword = async function (enteredPassword) {
+  return await bcrypt.compare(enteredPassword, this.password);
+};
+
+// Pre-save middleware to hash passwords
+userSchema.pre('save', async function (next) {
+  if (!this.isModified('password')) return next();
+  const salt = await bcrypt.genSalt(10);
+  this.password = await bcrypt.hash(this.password, salt);
+  next();
 });
 
-const User = mongoose.model('User', UserSchema);
-
-
-// --- API ROUTES ---
+const User = mongoose.model('User', userSchema);
 
 // Registration Endpoint
-app.post('/api/auth/register', async (req, res) => {
+app.post('/api/register', async (req, res) => {
   try {
-    const { email, password } = req.body;
+    const { name, email, password } = req.body;
 
-    const existingUser = await User.findOne({ email });
-    if (existingUser) {
-      return res.status(400).json({ message: 'Email is already registered.' });
+    if (!email || !password) {
+      return res.status(400).json({ message: 'Email and password are required' });
     }
 
-    const hashedPassword = await bcrypt.hash(password, 10);
-    const newUser = new User({ email, password: hashedPassword });
-    await newUser.save();
+    const userExists = await User.findOne({ email });
+    if (userExists) {
+      return res.status(400).json({ message: 'User already exists' });
+    }
 
-    res.status(201).json({ message: 'Account created successfully!' });
+    const user = await User.create({ name, email, password });
+
+    res.status(201).json({
+      _id: user._id,
+      name: user.name,
+      email: user.email,
+      message: 'Registration successful',
+    });
   } catch (error) {
-    console.error('REGISTRATION ERROR:', error);
-    res.status(500).json({ message: 'Server error during registration', error: error.message });
+    res.status(500).json({ message: error.message || 'Server error' });
   }
 });
 
-// Login Endpoint (Direct bcrypt check)
-app.post('/api/auth/login', async (req, res) => {
+// Login Endpoint
+app.post('/api/login', async (req, res) => {
   try {
     const { email, password } = req.body;
+
+    if (!email || !password) {
+      return res.status(400).json({ message: 'Email and password are required' });
+    }
 
     const user = await User.findOne({ email });
     if (!user) {
-      return res.status(401).json({ message: 'Invalid email or password.' });
+      return res.status(400).json({ message: 'Invalid email or password' });
     }
 
-    // Directly check using bcrypt package safely
-    const isMatch = await bcrypt.compare(password, user.password);
+    const isMatch = await user.matchPassword(password);
     if (!isMatch) {
-      return res.status(401).json({ message: 'Invalid email or password.' });
+      return res.status(400).json({ message: 'Invalid email or password' });
     }
 
-    res.status(200).json({ message: 'Login successful!', user: { email: user.email } });
+    res.json({
+      _id: user._id,
+      name: user.name,
+      email: user.email,
+      message: 'Login successful',
+    });
   } catch (error) {
-    console.error('LOGIN ERROR:', error);
-    res.status(500).json({ message: 'Server login error', error: error.message });
+    res.status(500).json({ message: error.message || 'Server error' });
   }
 });
 
-// Booking Routes
-app.post('/api/bookings', async (req, res) => {
-  try {
-    const newBooking = new Booking(req.body);
-    await newBooking.save();
-    res.status(201).json({ message: 'Booking saved successfully!', data: newBooking });
-  } catch (error) {
-    res.status(500).json({ message: 'Server error saving booking', error: error.message });
-  }
+// Root Route Check
+app.get('/', (req, res) => {
+  res.send('Gozak API Server is running');
 });
 
-app.get('/api/bookings', async (req, res) => {
-  try {
-    const todayStr = new Date().toISOString().split('T')[0];
-    const activeBookings = await Booking.find({
-      status: { $ne: 'completed' },
-      date: { $gte: todayStr }
-    }).sort({ date: 1, time: 1 });
-
-    res.status(200).json(activeBookings);
-  } catch (error) {
-    res.status(500).json({ message: 'Error fetching active bookings', error: error.message });
-  }
-});
-
-app.patch('/api/bookings/:id/complete', async (req, res) => {
-  try {
-    const updatedBooking = await Booking.findByIdAndUpdate(
-      req.params.id,
-      { status: 'completed' },
-      { new: true }
-    );
-    if (!updatedBooking) return res.status(404).json({ message: 'Booking not found' });
-    res.status(200).json({ message: 'Appointment marked as completed', updatedBooking });
-  } catch (error) {
-    res.status(500).json({ message: 'Error updating booking status', error: error.message });
-  }
-});
-
-const PORT = 5001;
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+  console.log(`Server running on port ${PORT}`);
 });
