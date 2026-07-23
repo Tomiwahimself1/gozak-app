@@ -25,21 +25,17 @@ const User = mongoose.model('User', UserSchema);
 
 // --- API ROUTES ---
 
-// NEW: Registration Endpoint to create new accounts securely
+// Registration Endpoint
 app.post('/api/auth/register', async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    // Check if the email is already registered
     const existingUser = await User.findOne({ email });
     if (existingUser) {
       return res.status(400).json({ message: 'Email is already registered.' });
     }
 
-    // Hash the password cleanly with a strength factor of 10
     const hashedPassword = await bcrypt.hash(password, 10);
-
-    // Create and save the new user
     const newUser = new User({ email, password: hashedPassword });
     await newUser.save();
 
@@ -50,7 +46,7 @@ app.post('/api/auth/register', async (req, res) => {
   }
 });
 
-// Auth Route: Verify Admin Credentials
+// Login Endpoint
 app.post('/api/auth/login', async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -72,7 +68,7 @@ app.post('/api/auth/login', async (req, res) => {
   }
 });
 
-// Booking Route: Catch form submissions
+// Booking Routes
 app.post('/api/bookings', async (req, res) => {
   try {
     const newBooking = new Booking(req.body);
@@ -83,7 +79,6 @@ app.post('/api/bookings', async (req, res) => {
   }
 });
 
-// Booking Route: Get all active bookings
 app.get('/api/bookings', async (req, res) => {
   try {
     const todayStr = new Date().toISOString().split('T')[0];
@@ -98,7 +93,6 @@ app.get('/api/bookings', async (req, res) => {
   }
 });
 
-// Booking Route: Mark an appointment as complete
 app.patch('/api/bookings/:id/complete', async (req, res) => {
   try {
     const updatedBooking = await Booking.findByIdAndUpdate(
@@ -113,7 +107,8 @@ app.patch('/api/bookings/:id/complete', async (req, res) => {
   }
 });
 
-const PORT = 5001; // Changed from 5000
+// LISTEN ON PORT 5001
+const PORT = 5001;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });

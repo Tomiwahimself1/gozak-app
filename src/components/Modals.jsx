@@ -24,7 +24,7 @@ export function ModalShell({ open, onClose, title, subtitle, children }) {
   );
 }
 
-// REAL SIGN IN MODAL WITH BACKEND CONNECTIVITY
+// REAL SIGN IN MODAL (Updated to Port 5001)
 export function SignInModal({ open, onClose, onSwitchToSignUp }) {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
@@ -35,7 +35,7 @@ export function SignInModal({ open, onClose, onSwitchToSignUp }) {
     setLoading(true);
 
     try {
-      const response = await fetch('http://localhost:5000/api/auth/login', {
+      const response = await fetch('http://localhost:5001/api/auth/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),
@@ -46,7 +46,7 @@ export function SignInModal({ open, onClose, onSwitchToSignUp }) {
       if (response.ok) {
         alert('Login successful!');
         onClose();
-        window.location.href = '/admin'; // Send them straight to dashboard
+        window.location.href = '/admin';
       } else {
         alert(`Login failed: ${data.message}`);
       }
@@ -87,14 +87,14 @@ export function SignInModal({ open, onClose, onSwitchToSignUp }) {
           {loading ? "Signing In..." : "Sign In"}
         </Btn>
         <p className="text-center text-xs text-stone-500 pt-2">
-          New to Gozak? <span className="font-bold underline-grow cursor-pointer text-rose-600" onClick={onSwitchToSignUp}>Create an account</span>
+          New to Gozak? <span className="font-bold cursor-pointer text-rose-600 hover:underline" onClick={onSwitchToSignUp}>Create an account</span>
         </p>
       </form>
     </ModalShell>
   );
 }
 
-// NEW: FUNCTIONAL SIGN UP MODAL
+// REAL SIGN UP MODAL (Updated to Port 5001)
 export function SignUpModal({ open, onClose, onSwitchToSignIn }) {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
@@ -105,7 +105,7 @@ export function SignUpModal({ open, onClose, onSwitchToSignIn }) {
     setLoading(true);
 
     try {
-      const response = await fetch('http://localhost:5000/api/auth/register', {
+      const response = await fetch('http://localhost:5001/api/auth/register', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password }),
@@ -115,7 +115,7 @@ export function SignUpModal({ open, onClose, onSwitchToSignIn }) {
 
       if (response.ok) {
         alert('Account created successfully! You can now sign in.');
-        onSwitchToSignIn(); // Automatically toggle back over to login view
+        onSwitchToSignIn();
       } else {
         alert(`Registration failed: ${data.message}`);
       }
@@ -156,13 +156,14 @@ export function SignUpModal({ open, onClose, onSwitchToSignIn }) {
           {loading ? "Creating Account..." : "Register Profile"}
         </Btn>
         <p className="text-center text-xs text-stone-500 pt-2">
-          Already have an account? <span className="font-bold underline-grow cursor-pointer text-amber-600" onClick={onSwitchToSignIn}>Sign In instead</span>
+          Already have an account? <span className="font-bold cursor-pointer text-amber-600 hover:underline" onClick={onSwitchToSignIn}>Sign In instead</span>
         </p>
       </form>
     </ModalShell>
   );
 }
 
+// REAL APPOINTMENT MODAL (Updated to Port 5001)
 export function AppointmentModal({ open, onClose }) {
   const services = ["Medication Counseling", "Blood Pressure Check", "Blood Sugar Test", "Health Screening", "Telemedicine Consultation"];
   
@@ -186,7 +187,7 @@ export function AppointmentModal({ open, onClose }) {
     setLoading(true);
     
     try {
-      const response = await fetch('http://localhost:5000/api/bookings', {
+      const response = await fetch('http://localhost:5001/api/bookings', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(formData),
