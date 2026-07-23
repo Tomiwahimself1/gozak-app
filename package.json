@@ -1,0 +1,32 @@
+{
+  "name": "gozak-app",
+  "version": "1.0.0",
+  "description": "React + Tailwind CSS build of the Gozak marketing site: a long animated home page plus About, Pharmacy, Supermarket, Shopping Mall, Services, and Contact pages, with Sign In and Book Appointment modals wired into the nav.",
+  "main": "index.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "bcrypt": "^6.0.0",
+    "cors": "^2.8.6",
+    "express": "^5.2.1",
+    "lucide-react": "^1.25.0",
+    "mongoose": "^9.7.4",
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.3.3",
+    "@vitejs/plugin-react": "^6.0.3",
+    "autoprefixer": "^10.5.4",
+    "postcss": "^8.5.20",
+    "tailwindcss": "^4.3.3",
+    "vite": "^8.1.5"
+  }
+}
