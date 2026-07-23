@@ -24,15 +24,17 @@ export function ModalShell({ open, onClose, title, subtitle, children }) {
   );
 }
 
-// REAL SIGN IN MODAL (Updated to Port 5001)
+// SIGN IN MODAL WITH INLINE ERROR DISPLAY
 export function SignInModal({ open, onClose, onSwitchToSignUp }) {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [loading, setLoading] = React.useState(false);
+  const [errorMsg, setErrorMsg] = React.useState('');
 
   const handleSignIn = async (e) => {
     e.preventDefault();
     setLoading(true);
+    setErrorMsg('');
 
     try {
       const response = await fetch('http://localhost:5001/api/auth/login', {
@@ -44,15 +46,14 @@ export function SignInModal({ open, onClose, onSwitchToSignUp }) {
       const data = await response.json();
 
       if (response.ok) {
-        alert('Login successful!');
         onClose();
         window.location.href = '/admin';
       } else {
-        alert(`Login failed: ${data.message}`);
+        setErrorMsg(data.message || 'Login failed.');
       }
-    } catch (error) {
-      console.error(error);
-      alert('Could not connect to authentication server.');
+    } catch (err) {
+      console.error(err);
+      setErrorMsg('Could not connect to authentication server.');
     } finally {
       setLoading(false);
     }
@@ -61,6 +62,11 @@ export function SignInModal({ open, onClose, onSwitchToSignUp }) {
   return (
     <ModalShell open={open} onClose={onClose} title="Welcome back" subtitle="Sign in to manage your orders, prescriptions and appointments.">
       <form className="space-y-4" onSubmit={handleSignIn}>
+        {errorMsg && (
+          <div className="p-3 text-xs bg-rose-50 border border-rose-200 text-rose-700 rounded-xl font-medium">
+            {errorMsg}
+          </div>
+        )}
         <div>
           <label className="text-xs font-bold text-stone-600 uppercase tracking-wide">Email</label>
           <input 
@@ -87,22 +93,33 @@ export function SignInModal({ open, onClose, onSwitchToSignUp }) {
           {loading ? "Signing In..." : "Sign In"}
         </Btn>
         <p className="text-center text-xs text-stone-500 pt-2">
-          New to Gozak? <span className="font-bold cursor-pointer text-rose-600 hover:underline" onClick={onSwitchToSignUp}>Create an account</span>
+          New to Gozak?{" "}
+          <button 
+            type="button" 
+            onClick={onSwitchToSignUp} 
+            className="font-bold text-rose-600 underline hover:text-rose-800 transition"
+          >
+            Create an account
+          </button>
         </p>
       </form>
     </ModalShell>
   );
 }
 
-// REAL SIGN UP MODAL (Updated to Port 5001)
+// SIGN UP MODAL WITH INLINE ERROR & SUCCESS DISPLAY
 export function SignUpModal({ open, onClose, onSwitchToSignIn }) {
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
   const [loading, setLoading] = React.useState(false);
+  const [errorMsg, setErrorMsg] = React.useState('');
+  const [successMsg, setSuccessMsg] = React.useState('');
 
   const handleSignUp = async (e) => {
     e.preventDefault();
     setLoading(true);
+    setErrorMsg('');
+    setSuccessMsg('');
 
     try {
       const response = await fetch('http://localhost:5001/api/auth/register', {
@@ -114,14 +131,16 @@ export function SignUpModal({ open, onClose, onSwitchToSignIn }) {
       const data = await response.json();
 
       if (response.ok) {
-        alert('Account created successfully! You can now sign in.');
-        onSwitchToSignIn();
+        setSuccessMsg('Account created successfully! Switching to sign in...');
+        setTimeout(() => {
+          onSwitchToSignIn();
+        }, 1500);
       } else {
-        alert(`Registration failed: ${data.message}`);
+        setErrorMsg(data.message || 'Registration failed.');
       }
-    } catch (error) {
-      console.error(error);
-      alert('Could not connect to authentication server.');
+    } catch (err) {
+      console.error(err);
+      setErrorMsg('Could not connect to authentication server.');
     } finally {
       setLoading(false);
     }
@@ -130,6 +149,16 @@ export function SignUpModal({ open, onClose, onSwitchToSignIn }) {
   return (
     <ModalShell open={open} onClose={onClose} title="Create an account" subtitle="Register a new management profile for Gozak & Co.">
       <form className="space-y-4" onSubmit={handleSignUp}>
+        {errorMsg && (
+          <div className="p-3 text-xs bg-rose-50 border border-rose-200 text-rose-700 rounded-xl font-medium">
+            {errorMsg}
+          </div>
+        )}
+        {successMsg && (
+          <div className="p-3 text-xs bg-emerald-50 border border-emerald-200 text-emerald-700 rounded-xl font-medium">
+            {successMsg}
+          </div>
+        )}
         <div>
           <label className="text-xs font-bold text-stone-600 uppercase tracking-wide">Email Address</label>
           <input 
@@ -156,14 +185,21 @@ export function SignUpModal({ open, onClose, onSwitchToSignIn }) {
           {loading ? "Creating Account..." : "Register Profile"}
         </Btn>
         <p className="text-center text-xs text-stone-500 pt-2">
-          Already have an account? <span className="font-bold cursor-pointer text-amber-600 hover:underline" onClick={onSwitchToSignIn}>Sign In instead</span>
+          Already have an account?{" "}
+          <button 
+            type="button" 
+            onClick={onSwitchToSignIn} 
+            className="font-bold text-amber-600 underline hover:text-amber-800 transition"
+          >
+            Sign In instead
+          </button>
         </p>
       </form>
     </ModalShell>
   );
 }
 
-// REAL APPOINTMENT MODAL (Updated to Port 5001)
+// APPOINTMENT MODAL
 export function AppointmentModal({ open, onClose }) {
   const services = ["Medication Counseling", "Blood Pressure Check", "Blood Sugar Test", "Health Screening", "Telemedicine Consultation"];
   
@@ -176,6 +212,7 @@ export function AppointmentModal({ open, onClose }) {
   });
   
   const [loading, setLoading] = React.useState(false);
+  const [statusMsg, setStatusMsg] = React.useState('');
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -185,6 +222,7 @@ export function AppointmentModal({ open, onClose }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
+    setStatusMsg('');
     
     try {
       const response = await fetch('http://localhost:5001/api/bookings', {
@@ -196,15 +234,18 @@ export function AppointmentModal({ open, onClose }) {
       const data = await response.json();
 
       if (response.ok) {
-        alert('Appointment booked successfully!');
+        setStatusMsg('Appointment booked successfully!');
         setFormData({ name: '', service: services[0], date: '', time: '', phone: '' });
-        onClose();
+        setTimeout(() => {
+          onClose();
+          setStatusMsg('');
+        }, 1500);
       } else {
-        alert(`Booking failed: ${data.message || 'Please try again.'}`);
+        setStatusMsg(`Booking failed: ${data.message || 'Please try again.'}`);
       }
-    } catch (error) {
-      console.error(error);
-      alert('Could not connect to the booking server.');
+    } catch (err) {
+      console.error(err);
+      setStatusMsg('Could not connect to the booking server.');
     } finally {
       setLoading(false);
     }
@@ -213,6 +254,11 @@ export function AppointmentModal({ open, onClose }) {
   return (
     <ModalShell open={open} onClose={onClose} title="Book an appointment" subtitle="Reserve a slot with our pharmacists or health team.">
       <form className="space-y-4" onSubmit={handleSubmit}>
+        {statusMsg && (
+          <div className="p-3 text-xs bg-stone-100 border border-stone-300 text-stone-800 rounded-xl font-medium">
+            {statusMsg}
+          </div>
+        )}
         <div>
           <label className="text-xs font-bold text-stone-600 uppercase tracking-wide">Patient Name</label>
           <input 

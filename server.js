@@ -20,6 +20,7 @@ const UserSchema = new mongoose.Schema({
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true }
 });
+
 const User = mongoose.model('User', UserSchema);
 
 
@@ -46,7 +47,7 @@ app.post('/api/auth/register', async (req, res) => {
   }
 });
 
-// Login Endpoint
+// Login Endpoint (Direct bcrypt check)
 app.post('/api/auth/login', async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -56,6 +57,7 @@ app.post('/api/auth/login', async (req, res) => {
       return res.status(401).json({ message: 'Invalid email or password.' });
     }
 
+    // Directly check using bcrypt package safely
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) {
       return res.status(401).json({ message: 'Invalid email or password.' });
@@ -64,7 +66,7 @@ app.post('/api/auth/login', async (req, res) => {
     res.status(200).json({ message: 'Login successful!', user: { email: user.email } });
   } catch (error) {
     console.error('LOGIN ERROR:', error);
-    res.status(500).json({ message: 'Server error during login', error: error.message });
+    res.status(500).json({ message: 'Server login error', error: error.message });
   }
 });
 
@@ -107,7 +109,6 @@ app.patch('/api/bookings/:id/complete', async (req, res) => {
   }
 });
 
-// LISTEN ON PORT 5001
 const PORT = 5001;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
