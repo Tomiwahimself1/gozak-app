@@ -1,14 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Pill, ClipboardList, Baby, HeartPulse, Syringe, Sparkles, Search,
-  Clock, Shield, Truck, Stethoscope,
+  Clock, Shield, Truck, Stethoscope, Eye, CheckCircle2, Phone, MapPin, X
 } from "lucide-react";
 import { BRAND } from "../lib/brand";
 import { Reveal } from "../components/Reveal";
 import { Btn } from "../components/Btn";
-import { PageHero, SectionHead, ProductCard, CategoryTile } from "../components/Shared";
+import { PageHero, SectionHead, CategoryTile } from "../components/Shared";
 
 export default function PharmacyPage() {
+  const [selectedProduct, setSelectedProduct] = useState(null);
+
   const cats = [
     { Icon: Pill, label: "Prescription Drugs", count: "320+ items" },
     { Icon: ClipboardList, label: "OTC Medicines", count: "210+ items" },
@@ -18,11 +20,43 @@ export default function PharmacyPage() {
     { Icon: Sparkles, label: "Personal Care", count: "140+ items" },
   ];
 
-  const products = [
-    { name: "Paracetamol 500mg", cat: "OTC Medicines", price: "₦500", rating: 5, Icon: Pill, tag: "Popular" },
-    { name: "Digital BP Monitor", cat: "Medical Devices", price: "₦18,500", rating: 4, Icon: Syringe, tag: "New" },
-    { name: "Baby Multivitamin Drops", cat: "Baby Care", price: "₦3,200", rating: 5, Icon: Baby },
-    { name: "Omega-3 Fish Oil", cat: "Supplements", price: "₦6,800", oldPrice: "₦8,000", rating: 4, Icon: HeartPulse },
+  const showcaseProducts = [
+    {
+      id: 1,
+      name: "Prescription & OTC Medications",
+      cat: "Pharmacy Essentials",
+      desc: "Comprehensive selection of genuine pain relievers, antibiotics, and daily medications dispensed by licensed pharmacists.",
+      image: "/images/pharmacy/medications.jpg",
+      badge: "In Stock",
+      features: ["Verified Quality", "Licensed Pharmacist On-site"]
+    },
+    {
+      id: 2,
+      name: "Digital Health & BP Monitors",
+      cat: "Medical Devices",
+      desc: "Accurate blood pressure monitors, pulse oximeters, and diagnostic tools for easy at-home health tracking.",
+      image: "/images/pharmacy/bp-monitor.jpg",
+      badge: "Popular",
+      features: ["Clinically Tested", "Warranty Included"]
+    },
+    {
+      id: 3,
+      name: "Baby & Pediatric Care Essentials",
+      cat: "Baby Care",
+      desc: "Gentle multivitamins, infant formula, skincare, and growth supplements trusted by pediatric specialists.",
+      image: "/images/pharmacy/baby-care.jpg",
+      badge: "Essential",
+      features: ["Dermatologist Approved", "Safe Formula"]
+    },
+    {
+      id: 4,
+      name: "Wellness Supplements & Vitamins",
+      cat: "Supplements",
+      desc: "Premium Omega-3s, Vitamin C, Multivitamins, and immune boosters sourced from certified international brands.",
+      image: "/images/pharmacy/supplements.jpg",
+      badge: "Top Rated",
+      features: ["100% Authentic", "Immune Support"]
+    },
   ];
 
   const features = [
@@ -36,29 +70,36 @@ export default function PharmacyPage() {
 
   return (
     <>
-      <PageHero eyebrow="Pharmacy" title="Licensed pharmacy care you can trust." desc="Prescription medicines, OTC essentials, and professional guidance from our registered pharmacists." Icon={Pill} />
+      <PageHero 
+        eyebrow="Pharmacy" 
+        title="Licensed pharmacy care you can trust." 
+        desc="Prescription medicines, OTC essentials, and professional guidance from our registered pharmacists." 
+        Icon={Pill} 
+      />
 
+      {/* Search Bar */}
       <section className="py-8">
         <div className="max-w-7xl mx-auto px-6">
           <Reveal>
             <div className="bg-white rounded-2xl border border-stone-100 p-4 flex flex-col md:flex-row gap-3 shadow-sm">
               <div className="flex-1 flex items-center gap-3 px-4 py-2.5 rounded-xl bg-stone-50">
                 <Search size={17} className="text-stone-400" />
-                <input placeholder="Search medicines, brands, categories..." className="bg-transparent outline-none text-sm w-full" />
+                <input placeholder="Search medicines, health products, categories..." className="bg-transparent outline-none text-sm w-full" />
               </div>
               <select className="px-4 py-2.5 rounded-xl bg-stone-50 text-sm outline-none">
-                <option>All Categories</option><option>Prescription</option><option>OTC</option>
+                <option>All Categories</option>
+                <option>Prescription</option>
+                <option>OTC Medicines</option>
+                <option>Supplements</option>
               </select>
-              <select className="px-4 py-2.5 rounded-xl bg-stone-50 text-sm outline-none">
-                <option>Sort: Popular</option><option>Price: Low to High</option><option>Price: High to Low</option>
-              </select>
-              <Btn variant="primary" icon={Search}>Search</Btn>
+              <Btn variant="primary" icon={Search}>Search Stock</Btn>
             </div>
           </Reveal>
         </div>
       </section>
 
-      <section className="py-20">
+      {/* Categories */}
+      <section className="py-16">
         <div className="max-w-7xl mx-auto px-6">
           <SectionHead eyebrow="Browse" title="Pharmacy categories" />
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-5">
@@ -67,15 +108,71 @@ export default function PharmacyPage() {
         </div>
       </section>
 
+      {/* Popular Pharmacy Products Showcase */}
       <section className="py-20" style={{ background: "rgba(193,18,31,0.03)" }}>
         <div className="max-w-7xl mx-auto px-6">
-          <SectionHead eyebrow="Featured" title="Popular pharmacy products" />
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {products.map((p, i) => <ProductCard key={i} {...p} delay={i * 80} />)}
+          <SectionHead 
+            eyebrow="Featured Counter" 
+            title="Popular pharmacy products" 
+            desc="Explore our genuine healthcare range available in-store at Gozak Pharmacy." 
+          />
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-7">
+            {showcaseProducts.map((p, i) => (
+              <Reveal delay={i * 90} key={p.id}>
+                <div className="group bg-white rounded-2xl border border-stone-100 overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col h-full">
+                  
+                  {/* Photo Container */}
+                  <div className="relative h-56 overflow-hidden bg-stone-100">
+                    <img 
+                      src={p.image} 
+                      alt={p.name}
+                      onError={(e) => {
+                        e.target.src = "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=600&q=80";
+                      }}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                      <button 
+                        onClick={() => setSelectedProduct(p)}
+                        className="w-full py-2.5 bg-white/95 text-stone-900 rounded-xl font-bold text-xs flex items-center justify-center gap-2 hover:bg-white transition"
+                      >
+                        <Eye size={15} /> Quick Info
+                      </button>
+                    </div>
+
+                    <span className="absolute top-3 left-3 bg-white/90 backdrop-blur-md text-stone-800 text-[11px] font-bold px-3 py-1 rounded-full shadow-sm">
+                      {p.badge}
+                    </span>
+                  </div>
+
+                  {/* Card Content */}
+                  <div className="p-5 flex flex-col flex-1">
+                    <span className="text-[11px] font-bold uppercase tracking-wider text-red-600 mb-1">{p.cat}</span>
+                    <h4 className="font-extrabold text-base leading-snug mb-2" style={{ color: BRAND.dark }}>{p.name}</h4>
+                    <p className="text-xs text-stone-500 leading-relaxed mb-4 flex-1">{p.desc}</p>
+                    
+                    <div className="pt-3 border-t border-stone-100 flex items-center justify-between text-xs font-semibold text-stone-600">
+                      <span className="flex items-center gap-1 text-emerald-600">
+                        <CheckCircle2 size={14} /> Available In-Store
+                      </span>
+                      <button 
+                        onClick={() => setSelectedProduct(p)}
+                        className="text-stone-400 hover:text-red-600 transition"
+                      >
+                        Details →
+                      </button>
+                    </div>
+                  </div>
+
+                </div>
+              </Reveal>
+            ))}
           </div>
         </div>
       </section>
 
+      {/* Features Section */}
       <section className="py-28">
         <div className="max-w-7xl mx-auto px-6">
           <SectionHead eyebrow="Pharmacy Features" title="More than a medicine counter" desc="Tools that make managing your family's health easier." />
@@ -92,6 +189,62 @@ export default function PharmacyPage() {
           </div>
         </div>
       </section>
+
+      {/* Info Modal */}
+      {selectedProduct && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
+          <div className="bg-white rounded-3xl max-w-lg w-full overflow-hidden shadow-2xl relative">
+            <button 
+              onClick={() => setSelectedProduct(null)} 
+              className="absolute top-4 right-4 bg-stone-100 hover:bg-stone-200 text-stone-600 p-2 rounded-full transition z-10"
+            >
+              <X size={18} />
+            </button>
+
+            <div className="h-56 relative bg-stone-100">
+              <img 
+                src={selectedProduct.image} 
+                alt={selectedProduct.name}
+                onError={(e) => {
+                  e.target.src = "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?auto=format&fit=crop&w=600&q=80";
+                }}
+                className="w-full h-full object-cover"
+              />
+            </div>
+
+            <div className="p-6">
+              <span className="text-xs font-bold text-red-600 uppercase tracking-wider">{selectedProduct.cat}</span>
+              <h3 className="text-xl font-extrabold mt-1" style={{ color: BRAND.dark }}>{selectedProduct.name}</h3>
+              <p className="text-sm text-stone-600 mt-3 leading-relaxed">{selectedProduct.desc}</p>
+
+              <div className="mt-5 space-y-2">
+                <div className="text-xs font-bold text-stone-400 uppercase tracking-wide">Highlights</div>
+                <div className="flex flex-wrap gap-2">
+                  {selectedProduct.features.map((feat, idx) => (
+                    <span key={idx} className="text-xs font-medium bg-stone-100 text-stone-700 px-3 py-1 rounded-full">
+                      ✓ {feat}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              <div className="mt-6 pt-5 border-t border-stone-100 flex flex-col sm:flex-row gap-3">
+                <a 
+                  href="https://wa.me/2348111116110" 
+                  target="_blank" 
+                  rel="noreferrer" 
+                  className="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs py-3 rounded-xl flex items-center justify-center gap-2 transition"
+                >
+                  <Phone size={15} /> Inquire via WhatsApp
+                </a>
+                <div className="flex items-center justify-center gap-1.5 text-xs text-stone-500 font-medium px-4">
+                  <MapPin size={15} color={BRAND.red} /> Akure Garage Branch
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 }
