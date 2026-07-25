@@ -59,7 +59,7 @@ export default function HomePage() {
             </Reveal>
             <Reveal delay={300}>
               <div className="flex flex-wrap gap-3 mt-9">
-                <Btn variant="primary" icon={ShoppingBag} onClick={() => setPage("mall")}>Shop Now</Btn>
+                <Btn variant="primary" icon={ShoppingBag} onClick={() => setPage("about")}>Shop Now</Btn>
                 <Btn variant="gold" icon={Calendar} onClick={() => setApptOpen(true)}>Book Appointment</Btn>
                 <a
                   href="https://wa.me/2348111116110"
@@ -147,8 +147,8 @@ export default function HomePage() {
             <div className="rounded-[28px] border border-stone-100 bg-white overflow-hidden shadow-[0_24px_60px_-30px_rgba(28,16,6,0.15)]">
               {[
                 { lvl: "Ground Floor", n: "01", bar: BRAND.red, title: "Pharmacy & Healthcare", desc: "Licensed pharmacists, prescription care and wellness services.", cats: ["Prescription Drugs", "OTC Medicines", "Baby Care", "Supplements", "Medical Devices"], page: "pharmacy" },
-                { lvl: "Level 2", n: "02", bar: BRAND.gold, title: "Supermarket", desc: "Fresh groceries and household essentials for everyday living.", cats: ["Groceries", "Beverages", "Frozen Foods", "Snacks", "Cleaning Supplies"], page: "supermarket" },
-                { lvl: "Level 3", n: "03", bar: BRAND.goldLight, title: "Shopping Mall & Lifestyle", desc: "Electronics, fashion and home essentials, all in one visit.", cats: ["Electronics", "Mobile Phones", "Furniture", "Fashion", "Accessories"], page: "mall" },
+                { lvl: "Level 2", n: "02", bar: BRAND.gold, title: "Supermarket", desc: "Fresh groceries and household essentials for everyday living.", cats: ["Groceries", "Beverages", "Frozen Foods", "Snacks", "Cleaning Supplies"], page: "about" },
+                { lvl: "Level 3", n: "03", bar: BRAND.goldLight, title: "Shopping Mall & Lifestyle", desc: "Electronics, fashion and home essentials, all in one visit.", cats: ["Electronics", "Mobile Phones", "Furniture", "Fashion", "Accessories"], page: "about" },
               ].map((f, i) => (
                 <button key={i} onClick={() => setPage(f.page)} className="w-full text-left grid md:grid-cols-[120px_1fr_1.3fr] border-b last:border-b-0 border-stone-100 hover:bg-stone-50/70 transition-colors group">
                   <div className="relative flex flex-col justify-center px-8 py-8">
@@ -230,9 +230,21 @@ export default function HomePage() {
       <section className="py-28 relative overflow-hidden" style={{ background: BRAND.dark }}>
         <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-[0.85fr_1.15fr] gap-16 items-center">
           <Reveal scale>
-            <div className="aspect-[4/5] rounded-3xl relative overflow-hidden border border-white/10" style={{ background: `linear-gradient(160deg, #2a1200, ${BRAND.red} 60%, ${BRAND.gold})` }}>
-              <div className="absolute right-[-30px] bottom-[-60px] text-[220px] font-extrabold opacity-[0.06] select-none text-white" style={{ fontFamily: "Manrope, sans-serif" }}>'12</div>
-              <div className="absolute left-5 bottom-5 bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl px-4 py-3 text-xs font-bold text-white">Founder, Gozak Pharmacy &amp; Supermarket</div>
+            <div className="aspect-[4/5] rounded-3xl relative overflow-hidden border border-white/10 group shadow-2xl bg-stone-900">
+              <img
+                src="/images/founder.jpg"
+                alt="Stanley Nzerem - Founder, Gozak Pharmacy & Supermarket"
+                onError={(e) => {
+                  e.target.src = "https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=800&q=80";
+                }}
+                className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700 ease-out"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+              <div className="absolute right-[-30px] bottom-[-60px] text-[220px] font-extrabold opacity-[0.08] select-none text-white pointer-events-none" style={{ fontFamily: "Manrope, sans-serif" }}>'12</div>
+              <div className="absolute left-5 bottom-5 right-5 bg-black/40 backdrop-blur-md border border-white/20 rounded-2xl px-5 py-3.5 text-white z-10">
+                <div className="text-sm font-extrabold">Stanley Nzerem</div>
+                <div className="text-xs text-white/70 font-medium">Founder, Gozak Pharmacy &amp; Supermarket</div>
+              </div>
             </div>
           </Reveal>
           <Reveal delay={120}>
