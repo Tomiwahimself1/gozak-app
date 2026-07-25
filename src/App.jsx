@@ -11,7 +11,6 @@ import { SignInModal, AppointmentModal } from "./components/Modals";
 import HomePage from "./pages/HomePage";
 import AboutPage from "./pages/AboutPage";
 import PharmacyPage from "./pages/PharmacyPage";
-import SupermarketPage from "./pages/SupermarketPage";
 import MallPage from "./pages/MallPage";
 import ServicePage from "./pages/ServicePage";
 import ContactPage from "./pages/ContactPage";
@@ -21,7 +20,6 @@ const PAGE_COMPONENTS = {
   home: HomePage,
   about: AboutPage,
   pharmacy: PharmacyPage,
-  supermarket: SupermarketPage,
   mall: MallPage,
   service: ServicePage,
   contact: ContactPage,
@@ -29,16 +27,14 @@ const PAGE_COMPONENTS = {
 };
 
 export default function App() {
-  // Read saved page from localStorage; default to "home" instead of "admin"
   const [page, setPage] = useState(() => {
     const savedPage = localStorage.getItem("gozak_active_page");
-    return savedPage && savedPage !== "admin" ? savedPage : "home";
+    return savedPage && savedPage !== "admin" && savedPage !== "supermarket" ? savedPage : "home";
   });
 
   const [signInOpen, setSignInOpen] = useState(false);
   const [apptOpen, setApptOpen] = useState(false);
 
-  // Save page state whenever user changes tabs
   useEffect(() => {
     localStorage.setItem("gozak_active_page", page);
   }, [page]);
@@ -61,7 +57,6 @@ export default function App() {
   );
 }
 
-// Find the root div in your index.html and mount the App component
 const container = document.getElementById('root');
 const root = createRoot(container);
 root.render(
