@@ -126,7 +126,7 @@ export default function HomePage() {
           {[
             { n: 10, s: "+", l: "Years of Experience" },
             { n: 3, s: "", l: "Branches Across Ondo" },
-            { n: 150, s: "K+", l: "Community Visits" },
+            { n: 500, s: "K+", l: "Community Visits" },
             { n: 98, s: "%", l: "Customer Satisfaction" },
           ].map((s, i) => (
             <Reveal delay={i * 100} key={i}>
@@ -240,7 +240,6 @@ export default function HomePage() {
                 className="w-full h-full object-cover object-top group-hover:scale-105 transition-transform duration-700 ease-out"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-              <div className="absolute right-[-30px] bottom-[-60px] text-[220px] font-extrabold opacity-[0.08] select-none text-white pointer-events-none" style={{ fontFamily: "Manrope, sans-serif" }}>'12</div>
               <div className="absolute left-5 bottom-5 right-5 bg-black/40 backdrop-blur-md border border-white/20 rounded-2xl px-5 py-3.5 text-white z-10">
                 <div className="text-sm font-extrabold">Stanley Nzerem</div>
                 <div className="text-xs text-white/70 font-medium">Founder, Gozak Pharmacy &amp; Supermarket</div>
