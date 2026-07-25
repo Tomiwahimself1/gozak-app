@@ -5,7 +5,7 @@ import {
 import { BRAND } from "../lib/brand";
 import { Reveal } from "../components/Reveal";
 import { Btn } from "../components/Btn";
-import { PageHero, SectionHead, ProductCard, CategoryTile } from "../components/Shared";
+import { PageHero, SectionHead, CategoryTile } from "../components/Shared";
 
 export default function AboutPage() {
   const values = [
@@ -22,13 +22,6 @@ export default function AboutPage() {
     { Icon: Sofa, label: "Furniture", count: "60+ items" },
     { Icon: Shirt, label: "Fashion", count: "200+ items" },
     { Icon: Building2, label: "Home Appliances", count: "75+ items" },
-  ];
-
-  const mallProducts = [
-    { name: "Smart LED TV 43\"", cat: "Electronics", price: "₦185,000", rating: 5, Icon: Tv, tag: "New" },
-    { name: "Android Smartphone", cat: "Mobile Phones", price: "₦95,000", oldPrice: "₦110,000", rating: 4, Icon: Smartphone, tag: "Popular" },
-    { name: "3-Seater Fabric Sofa", cat: "Furniture", price: "₦145,000", rating: 4, Icon: Sofa },
-    { name: "Men's Casual Shirt", cat: "Fashion", price: "₦8,500", rating: 5, Icon: Shirt },
   ];
 
   const galleryImages = [
@@ -115,16 +108,6 @@ export default function AboutPage() {
           <SectionHead eyebrow="Shopping Mall" title="Electronics, fashion & home — all in one visit" desc="From the latest gadgets to furniture and lifestyle finds, Level 3 has it all." />
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-5">
             {mallCats.map((c, i) => <CategoryTile key={i} {...c} delay={i * 60} />)}
-          </div>
-        </div>
-      </section>
-
-      {/* Shopping Mall - Featured Products Section */}
-      <section className="py-20" style={{ background: "rgba(193,18,31,0.03)" }}>
-        <div className="max-w-7xl mx-auto px-6">
-          <SectionHead eyebrow="Mall Highlights" title="Trending in the mall" />
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-            {mallProducts.map((p, i) => <ProductCard key={i} {...p} delay={i * 80} />)}
           </div>
         </div>
       </section>
