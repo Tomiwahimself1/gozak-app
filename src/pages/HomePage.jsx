@@ -72,22 +72,35 @@ export default function HomePage() {
             </Reveal>
           </div>
 
+          {/* Supermarket Video Container */}
           <Reveal delay={150} scale className="relative h-[440px] hidden md:block">
             <div
-              className="absolute inset-0 rounded-[28px] overflow-hidden"
-              style={{ background: `linear-gradient(155deg, ${BRAND.red} 0%, ${BRAND.redDark} 55%, ${BRAND.redDeep} 100%)`, boxShadow: "0 30px 70px -22px rgba(90,10,14,0.5)" }}
+              className="absolute inset-0 rounded-[28px] overflow-hidden flex items-center justify-center bg-black border border-white/20"
+              style={{ boxShadow: "0 30px 70px -22px rgba(90,10,14,0.5)" }}
             >
-              <div className="absolute right-[-40px] bottom-[-60px] text-[280px] font-extrabold opacity-10 select-none" style={{ fontFamily: "Manrope, sans-serif", color: "#fff" }}>℞</div>
-              <div className="absolute inset-0 opacity-[0.08]" style={{ backgroundImage: "repeating-linear-gradient(115deg, rgba(255,255,255,0.5) 0 2px, transparent 2px 26px)" }} />
+              <video 
+                controls 
+                autoPlay 
+                muted 
+                loop 
+                className="w-full h-full object-cover rounded-[28px]"
+              >
+                <source src="/videos/supermarket-tour.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
             </div>
-            <div className="absolute top-8 -left-6 bg-white/90 backdrop-blur-md rounded-2xl px-5 py-4 shadow-2xl flex items-center gap-3 anim-float">
+
+            {/* Floating Open Now Badge */}
+            <div className="absolute top-6 -left-6 bg-white/90 backdrop-blur-md rounded-2xl px-5 py-3.5 shadow-2xl flex items-center gap-3 anim-float z-10">
               <span className="w-2.5 h-2.5 rounded-full anim-pulsering" style={{ background: "#10B981" }} />
               <div>
                 <div className="text-xs font-bold" style={{ color: BRAND.dark }}>Open Now</div>
                 <div className="text-[11px] text-stone-500">Closes 9:00 PM · Mon–Sat</div>
               </div>
             </div>
-            <div className="absolute bottom-9 -right-5 bg-white/90 backdrop-blur-md rounded-2xl px-5 py-4 shadow-2xl max-w-[230px]" style={{ animation: "floatSlow 6s ease-in-out infinite reverse" }}>
+
+            {/* Floating Address Badge */}
+            <div className="absolute bottom-6 -right-5 bg-white/90 backdrop-blur-md rounded-2xl px-5 py-3.5 shadow-2xl max-w-[230px] z-10" style={{ animation: "floatSlow 6s ease-in-out infinite reverse" }}>
               <div className="flex items-center gap-2 text-xs font-bold" style={{ color: BRAND.dark }}>
                 <ShoppingBasket size={14} color={BRAND.red} /> No.1 Adenikpekun Close
               </div>
