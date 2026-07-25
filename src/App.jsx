@@ -12,7 +12,6 @@ import HomePage from "./pages/HomePage";
 import AboutPage from "./pages/AboutPage";
 import PharmacyPage from "./pages/PharmacyPage";
 import MallPage from "./pages/MallPage";
-import ServicePage from "./pages/ServicePage";
 import ContactPage from "./pages/ContactPage";
 import AdminPage from './pages/AdminPage';
 
@@ -21,7 +20,6 @@ const PAGE_COMPONENTS = {
   about: AboutPage,
   pharmacy: PharmacyPage,
   mall: MallPage,
-  service: ServicePage,
   contact: ContactPage,
   admin: AdminPage,
 };
@@ -29,7 +27,7 @@ const PAGE_COMPONENTS = {
 export default function App() {
   const [page, setPage] = useState(() => {
     const savedPage = localStorage.getItem("gozak_active_page");
-    return savedPage && savedPage !== "admin" && savedPage !== "supermarket" ? savedPage : "home";
+    return savedPage && savedPage !== "admin" && savedPage !== "service" ? savedPage : "home";
   });
 
   const [signInOpen, setSignInOpen] = useState(false);
