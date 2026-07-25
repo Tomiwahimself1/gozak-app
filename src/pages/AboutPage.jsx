@@ -12,6 +12,50 @@ export default function AboutPage() {
     { Icon: Sparkles, t: "Affordable Quality", d: "Premium care shouldn't be out of reach." },
   ];
 
+  // Gallery items pointing to your mall showcase images (with fallbacks)
+  const galleryImages = [
+    {
+      title: "Main Mall Atrium",
+      src: "/images/mall/mall-1.jpg",
+      fallback: "https://images.unsplash.com/photo-1519567241046-7f570eee3ce6?auto=format&fit=crop&w=600&q=80",
+    },
+    {
+      title: "Pharmacy & Wellness Counter",
+      src: "/images/mall/mall-2.jpg",
+      fallback: "https://images.unsplash.com/photo-1586015555751-63bb77f4322a?auto=format&fit=crop&w=600&q=80",
+    },
+    {
+      title: "Electronics & Gadgets Hub",
+      src: "/images/mall/mall-3.jpg",
+      fallback: "https://images.unsplash.com/photo-1526738549149-8e07eca6c147?auto=format&fit=crop&w=600&q=80",
+    },
+    {
+      title: "Supermarket Aisles",
+      src: "/images/mall/mall-4.jpg",
+      fallback: "https://images.unsplash.com/photo-1578916171728-46686eac8d58?auto=format&fit=crop&w=600&q=80",
+    },
+    {
+      title: "Fashion & Lifestyle Store",
+      src: "/images/mall/mall-5.jpg",
+      fallback: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=600&q=80",
+    },
+    {
+      title: "Beauty & Cosmetics Display",
+      src: "/images/mall/mall-6.jpg",
+      fallback: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=600&q=80",
+    },
+    {
+      title: "Home Appliances Showcase",
+      src: "/images/mall/mall-7.jpg",
+      fallback: "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=600&q=80",
+    },
+    {
+      title: "Customer Support Desk",
+      src: "/images/mall/mall-8.jpg",
+      fallback: "https://images.unsplash.com/photo-1556740758-90de374c12ad?auto=format&fit=crop&w=600&q=80",
+    },
+  ];
+
   return (
     <>
       <PageHero
@@ -21,6 +65,7 @@ export default function AboutPage() {
         Icon={Building2}
       />
 
+      {/* Timeline Section */}
       <section className="py-8 pb-24">
         <div className="max-w-5xl mx-auto px-6">
           <SectionHead eyebrow="Timeline" title="How we grew" center={false} />
@@ -46,25 +91,35 @@ export default function AboutPage() {
         </div>
       </section>
 
+      {/* Mission & Vision Section */}
       <section className="py-24" style={{ background: BRAND.dark }}>
         <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-10">
           <Reveal>
             <div className="bg-white/5 border border-white/10 rounded-3xl p-9 h-full">
-              <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-5" style={{ background: "rgba(244,161,0,0.15)", color: BRAND.goldLight }}><Sparkles size={22} /></div>
+              <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-5" style={{ background: "rgba(244,161,0,0.15)", color: BRAND.goldLight }}>
+                <Sparkles size={22} />
+              </div>
               <h3 className="text-xl font-extrabold text-white">Our Mission</h3>
-              <p className="text-sm mt-3 text-white/60 leading-relaxed">To provide accessible, trustworthy healthcare and everyday essentials to every family in Ondo State — with honesty, professionalism and care at every counter.</p>
+              <p className="text-sm mt-3 text-white/60 leading-relaxed">
+                To provide accessible, trustworthy healthcare and everyday essentials to every family in Ondo State — with honesty, professionalism and care at every counter.
+              </p>
             </div>
           </Reveal>
           <Reveal delay={100}>
             <div className="bg-white/5 border border-white/10 rounded-3xl p-9 h-full">
-              <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-5" style={{ background: "rgba(193,18,31,0.2)", color: "#ff8a8a" }}><Award size={22} /></div>
+              <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-5" style={{ background: "rgba(193,18,31,0.2)", color: "#ff8a8a" }}>
+                <Award size={22} />
+              </div>
               <h3 className="text-xl font-extrabold text-white">Our Vision</h3>
-              <p className="text-sm mt-3 text-white/60 leading-relaxed">To be the most trusted pharmacy and retail brand in Southwest Nigeria — a name synonymous with quality, community, and care.</p>
+              <p className="text-sm mt-3 text-white/60 leading-relaxed">
+                To be the most trusted pharmacy and retail brand in Southwest Nigeria — a name synonymous with quality, community, and care.
+              </p>
             </div>
           </Reveal>
         </div>
       </section>
 
+      {/* Core Values Section */}
       <section className="py-28">
         <div className="max-w-7xl mx-auto px-6">
           <SectionHead eyebrow="What We Stand For" title="Our core values" />
@@ -72,7 +127,9 @@ export default function AboutPage() {
             {values.map((v, i) => (
               <Reveal delay={i * 90} key={i}>
                 <div className="bg-white rounded-2xl border border-stone-100 p-7 h-full hover:-translate-y-1.5 hover:shadow-xl transition-all duration-300">
-                  <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-4" style={{ background: "rgba(193,18,31,0.08)", color: BRAND.red }}><v.Icon size={22} /></div>
+                  <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-4" style={{ background: "rgba(193,18,31,0.08)", color: BRAND.red }}>
+                    <v.Icon size={22} />
+                  </div>
                   <h4 className="font-extrabold text-base" style={{ color: BRAND.dark }}>{v.t}</h4>
                   <p className="text-sm text-stone-500 mt-2 leading-relaxed">{v.d}</p>
                 </div>
@@ -82,13 +139,28 @@ export default function AboutPage() {
         </div>
       </section>
 
+      {/* In Pictures Gallery Section */}
       <section className="pb-28">
         <div className="max-w-7xl mx-auto px-6">
           <SectionHead eyebrow="In Pictures" title="A look inside Gozak" />
           <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
-            {[BRAND.red, BRAND.gold, BRAND.redDark, BRAND.goldLight, "#2a1200", BRAND.red, BRAND.gold, BRAND.redDeep].map((c, i) => (
+            {galleryImages.map((img, i) => (
               <Reveal delay={i * 60} key={i}>
-                <div className="aspect-square rounded-2xl hover:scale-[1.03] transition-transform duration-300" style={{ background: `linear-gradient(160deg, ${c}, rgba(0,0,0,0.15))` }} />
+                <div className="group relative aspect-square rounded-2xl overflow-hidden bg-stone-100 shadow-sm border border-stone-100">
+                  <img
+                    src={img.src}
+                    alt={img.title}
+                    onError={(e) => {
+                      e.target.src = img.fallback;
+                    }}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
+                    <span className="text-white font-bold text-xs leading-snug">
+                      {img.title}
+                    </span>
+                  </div>
+                </div>
               </Reveal>
             ))}
           </div>
