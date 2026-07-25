@@ -11,7 +11,6 @@ import { SignInModal, AppointmentModal } from "./components/Modals";
 import HomePage from "./pages/HomePage";
 import AboutPage from "./pages/AboutPage";
 import PharmacyPage from "./pages/PharmacyPage";
-import MallPage from "./pages/MallPage";
 import ContactPage from "./pages/ContactPage";
 import AdminPage from './pages/AdminPage';
 
@@ -19,7 +18,6 @@ const PAGE_COMPONENTS = {
   home: HomePage,
   about: AboutPage,
   pharmacy: PharmacyPage,
-  mall: MallPage,
   contact: ContactPage,
   admin: AdminPage,
 };

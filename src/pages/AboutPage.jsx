@@ -1,8 +1,11 @@
 import React from "react";
-import { Building2, Shield, Award, Users, Sparkles } from "lucide-react";
+import {
+  Building2, Shield, Award, Users, Sparkles, Tv, Smartphone, Package, Sofa, Shirt
+} from "lucide-react";
 import { BRAND } from "../lib/brand";
 import { Reveal } from "../components/Reveal";
-import { PageHero, SectionHead } from "../components/Shared";
+import { Btn } from "../components/Btn";
+import { PageHero, SectionHead, ProductCard, CategoryTile } from "../components/Shared";
 
 export default function AboutPage() {
   const values = [
@@ -12,7 +15,22 @@ export default function AboutPage() {
     { Icon: Sparkles, t: "Affordable Quality", d: "Premium care shouldn't be out of reach." },
   ];
 
-  // Gallery items pointing to your mall showcase images (with fallbacks)
+  const mallCats = [
+    { Icon: Tv, label: "Electronics", count: "110+ items" },
+    { Icon: Smartphone, label: "Mobile Phones", count: "85+ items" },
+    { Icon: Package, label: "Accessories", count: "140+ items" },
+    { Icon: Sofa, label: "Furniture", count: "60+ items" },
+    { Icon: Shirt, label: "Fashion", count: "200+ items" },
+    { Icon: Building2, label: "Home Appliances", count: "75+ items" },
+  ];
+
+  const mallProducts = [
+    { name: "Smart LED TV 43\"", cat: "Electronics", price: "₦185,000", rating: 5, Icon: Tv, tag: "New" },
+    { name: "Android Smartphone", cat: "Mobile Phones", price: "₦95,000", oldPrice: "₦110,000", rating: 4, Icon: Smartphone, tag: "Popular" },
+    { name: "3-Seater Fabric Sofa", cat: "Furniture", price: "₦145,000", rating: 4, Icon: Sofa },
+    { name: "Men's Casual Shirt", cat: "Fashion", price: "₦8,500", rating: 5, Icon: Shirt },
+  ];
+
   const galleryImages = [
     {
       title: "Main Mall Atrium",
@@ -59,14 +77,14 @@ export default function AboutPage() {
   return (
     <>
       <PageHero
-        eyebrow="About Gozak"
+        eyebrow="About Gozak & Shopping Mall"
         title="Built on perseverance, trust and one small pharmacy shop."
-        desc="From a street vendor's cart in 2012 to a multi-level shopping destination — this is the Gozak story."
+        desc="From a street vendor's cart in 2012 to a multi-level shopping destination — browse our story, explore our mall, and discover the Gozak experience."
         Icon={Building2}
       />
 
       {/* Timeline Section */}
-      <section className="py-8 pb-24">
+      <section className="py-12 pb-20">
         <div className="max-w-5xl mx-auto px-6">
           <SectionHead eyebrow="Timeline" title="How we grew" center={false} />
           <div className="relative pl-8 border-l-2" style={{ borderColor: "rgba(193,18,31,0.15)" }}>
@@ -88,6 +106,40 @@ export default function AboutPage() {
               </Reveal>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Shopping Mall - Categories Section */}
+      <section className="py-16 bg-stone-50/60 border-y border-stone-100">
+        <div className="max-w-7xl mx-auto px-6">
+          <SectionHead eyebrow="Shopping Mall" title="Electronics, fashion & home — all in one visit" desc="From the latest gadgets to furniture and lifestyle finds, Level 3 has it all." />
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-5">
+            {mallCats.map((c, i) => <CategoryTile key={i} {...c} delay={i * 60} />)}
+          </div>
+        </div>
+      </section>
+
+      {/* Shopping Mall - Featured Products Section */}
+      <section className="py-20" style={{ background: "rgba(193,18,31,0.03)" }}>
+        <div className="max-w-7xl mx-auto px-6">
+          <SectionHead eyebrow="Mall Highlights" title="Trending in the mall" />
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            {mallProducts.map((p, i) => <ProductCard key={i} {...p} delay={i * 80} />)}
+          </div>
+        </div>
+      </section>
+
+      {/* Shopping Mall Promo Box */}
+      <section className="py-20">
+        <div className="max-w-5xl mx-auto px-6">
+          <Reveal>
+            <div className="rounded-3xl p-10 md:p-14 text-center" style={{ background: BRAND.dark }}>
+              <Sparkles className="mx-auto mb-4" size={30} color={BRAND.goldLight} />
+              <h3 className="text-2xl md:text-3xl font-extrabold text-white" style={{ fontFamily: "Manrope, sans-serif" }}>New arrivals every week</h3>
+              <p className="text-white/60 text-sm mt-3 max-w-md mx-auto">Visit Level 3 in-store or check back online for the latest electronics and lifestyle drops.</p>
+              <Btn variant="gold" className="mt-6">Browse Full Catalog</Btn>
+            </div>
+          </Reveal>
         </div>
       </section>
 

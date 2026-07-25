@@ -7,7 +7,6 @@ export const PAGES = ["home", "about", "pharmacy", "mall", "contact"];
 
 export const NAV_ITEMS = [
   { id: "pharmacy", label: "Pharmacy" },
-  { id: "mall", label: "Shopping Mall" },
   { id: "about", label: "About" },
   { id: "contact", label: "Contact" },
 ];
