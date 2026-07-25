@@ -1,17 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { Menu, X, User, Calendar } from "lucide-react";
+import { Menu, X, Calendar } from "lucide-react";
 import { BRAND } from "../lib/brand";
 import { useApp, NAV_ITEMS } from "../context/AppContext";
 import { Btn } from "./Btn";
-import { SignInModal, SignUpModal, AppointmentModal } from "./Modals"; // Import all required modals
+import { AppointmentModal } from "./Modals"; // Kept AppointmentModal only
 
 export function Navbar() {
-  const { page, setPage, signInOpen, setSignInOpen, apptOpen, setApptOpen } = useApp();
+  const { page, setPage, apptOpen, setApptOpen } = useApp();
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
-  
-  // NEW: Extra toggle state to control the visibility of the Sign Up modal interface
-  const [signUpOpen, setSignUpOpen] = useState(false);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 30);
@@ -23,17 +20,6 @@ export function Navbar() {
     setPage(p);
     setMobileOpen(false);
     window.scrollTo({ top: 0, behavior: "smooth" });
-  };
-
-  // Helper actions to switch fluidly between login and signup flows
-  const openSignUpWorkflow = () => {
-    setSignInOpen(false); // Close login panel
-    setSignUpOpen(true);  // Open sign up panel
-  };
-
-  const openSignInWorkflow = () => {
-    setSignUpOpen(false); // Close sign up panel
-    setSignInOpen(true);  // Open login panel
   };
 
   return (
@@ -76,13 +62,6 @@ export function Navbar() {
 
           <div className="flex items-center gap-2.5">
             <button
-              onClick={() => setSignInOpen(true)}
-              className="hidden sm:inline-flex items-center gap-1.5 text-sm font-bold px-4 py-2.5 rounded-full transition hover:-translate-y-0.5"
-              style={{ color: BRAND.red, border: "1.5px solid rgba(193,18,31,0.25)" }}
-            >
-              <User size={15} /> Sign In
-            </button>
-            <button
               onClick={() => setApptOpen(true)}
               className="hidden sm:inline-flex items-center gap-1.5 text-sm font-bold px-5 py-2.5 rounded-full text-white transition hover:-translate-y-0.5"
               style={{ backgroundColor: BRAND.red, boxShadow: "0 8px 20px -6px rgba(193,18,31,0.5)" }}
@@ -107,27 +86,14 @@ export function Navbar() {
                 {item.label}
               </button>
             ))}
-            <div className="flex gap-2 pt-3">
-              <Btn variant="ghost" className="flex-1" onClick={() => setSignInOpen(true)}>Sign In</Btn>
-              <Btn variant="primary" className="flex-1" onClick={() => setApptOpen(true)}>Book Now</Btn>
+            <div className="pt-3">
+              <Btn variant="primary" className="w-full" onClick={() => setApptOpen(true)}>Book Appointment</Btn>
             </div>
           </div>
         )}
       </nav>
 
-      {/* --- RENDER MODALS AND WIRING --- */}
-      <SignInModal 
-        open={signInOpen} 
-        onClose={() => setSignInOpen(false)} 
-        onSwitchToSignUp={openSignUpWorkflow} 
-      />
-
-      <SignUpModal 
-        open={signUpOpen} 
-        onClose={() => setSignUpOpen(false)} 
-        onSwitchToSignIn={openSignInWorkflow} 
-      />
-
+      {/* --- RENDER MODALS --- */}
       <AppointmentModal 
         open={apptOpen} 
         onClose={() => setApptOpen(false)} 
