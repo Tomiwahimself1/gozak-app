@@ -1,16 +1,13 @@
-import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import React from "react";
+import { motion } from "framer-motion";
 import {
   Building2, Shield, Award, Users, Sparkles, Tv, Smartphone, Package, Sofa, Shirt,
-  ChevronRight, Heart, CheckCircle2, ArrowRight, Eye, Store, MapPin
+  CheckCircle2, Eye, Store, MapPin
 } from "lucide-react";
 import { BRAND } from "../lib/brand";
-import { Btn } from "../components/Btn";
 import { CategoryTile } from "../components/Shared";
 
 export default function AboutPage() {
-  const [activeTab, setActiveTab] = useState("all");
-
   const values = [
     { Icon: Shield, t: "Trust", d: "Every product and every consultation is backed by our word." },
     { Icon: Award, t: "Integrity", d: "Honest pricing and honest advice, always." },
@@ -30,66 +27,51 @@ export default function AboutPage() {
   const galleryImages = [
     {
       title: "Main Mall Atrium",
-      category: "mall",
       src: "/images/mall/mall-1.jpg",
       fallback: "https://images.unsplash.com/photo-1519567241046-7f570eee3ce6?auto=format&fit=crop&w=600&q=80",
     },
     {
       title: "Pharmacy & Wellness Counter",
-      category: "pharmacy",
       src: "/images/mall/mall-2.jpg",
       fallback: "https://images.unsplash.com/photo-1586015555751-63bb77f4322a?auto=format&fit=crop&w=600&q=80",
     },
     {
       title: "Electronics & Gadgets Hub",
-      category: "mall",
       src: "/images/mall/mall-3.jpg",
       fallback: "https://images.unsplash.com/photo-1526738549149-8e07eca6c147?auto=format&fit=crop&w=600&q=80",
     },
     {
       title: "Supermarket Aisles",
-      category: "store",
       src: "/images/mall/mall-4.jpg",
       fallback: "https://images.unsplash.com/photo-1578916171728-46686eac8d58?auto=format&fit=crop&w=600&q=80",
     },
     {
       title: "Fashion & Lifestyle Store",
-      category: "mall",
       src: "/images/mall/mall-5.jpg",
       fallback: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=600&q=80",
     },
     {
       title: "Beauty & Cosmetics Display",
-      category: "store",
       src: "/images/mall/mall-6.jpg",
       fallback: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=600&q=80",
     },
     {
       title: "Home Appliances Showcase",
-      category: "mall",
       src: "/images/mall/mall-7.jpg",
       fallback: "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=600&q=80",
     },
     {
       title: "Customer Support Desk",
-      category: "pharmacy",
       src: "/images/mall/mall-8.jpg",
       fallback: "https://images.unsplash.com/photo-1556740758-90de374c12ad?auto=format&fit=crop&w=600&q=80",
     },
   ];
 
-  const filteredGallery = activeTab === "all" 
-    ? galleryImages 
-    : galleryImages.filter(img => img.category === activeTab);
-
   return (
     <>
-      {/* ================= HERO HEADER WITH CONTRAST SCRIM & ANIMATIONS ================= */}
-      <header className="relative pt-44 md:pt-52 pb-28 overflow-hidden bg-gradient-to-br from-stone-900 via-stone-850 to-stone-950 text-white">
+      {/* ================= HERO HEADER ================= */}
+      <header className="relative pt-36 md:pt-44 pb-28 overflow-hidden bg-gradient-to-br from-stone-900 via-stone-850 to-stone-950 text-white">
         
-        {/* Top Scrim Overlay for Navbar Contrast */}
-        <div className="absolute top-0 left-0 right-0 h-36 bg-gradient-to-b from-black/80 via-black/40 to-transparent z-10 pointer-events-none" />
-
         {/* Dynamic Glowing Ambient Orbs */}
         <motion.div 
           animate={{ scale: [1, 1.25, 1], opacity: [0.3, 0.5, 0.3] }} 
@@ -234,7 +216,6 @@ export default function AboutPage() {
                 transition={{ duration: 0.5, delay: i * 0.1 }}
                 className="relative group"
               >
-                {/* Timeline Pulsing Node */}
                 <div 
                   className="absolute -left-[41px] md:-left-[49px] top-1.5 w-6 h-6 rounded-full border-4 border-stone-50 transition-transform group-hover:scale-125 duration-300" 
                   style={{ background: BRAND.red }} 
@@ -277,8 +258,6 @@ export default function AboutPage() {
 
       {/* ================= MISSION & VISION SECTION ================= */}
       <section className="py-24 bg-stone-950 text-white relative overflow-hidden">
-        
-        {/* Glow backdrop */}
         <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-red-600/10 rounded-full blur-[140px] pointer-events-none" />
 
         <div className="max-w-7xl mx-auto px-6 relative z-10 grid md:grid-cols-2 gap-8">
@@ -351,70 +330,43 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* ================= FILTERABLE GALLERY SECTION ================= */}
+      {/* ================= GALLERY SECTION (Without Filter Navbar) ================= */}
       <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-6">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-12">
-            <div>
-              <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-100 text-amber-800 text-xs font-black tracking-widest uppercase mb-3">
-                <Eye size={14} className="text-amber-600" />
-                <span>In Pictures</span>
-              </div>
-              <h2 className="text-3xl md:text-4xl font-black text-stone-900" style={{ fontFamily: "Manrope, sans-serif" }}>
-                A look inside Gozak
-              </h2>
+          <div className="mb-12">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-amber-100 text-amber-800 text-xs font-black tracking-widest uppercase mb-3">
+              <Eye size={14} className="text-amber-600" />
+              <span>In Pictures</span>
             </div>
-
-            {/* Interactive Filter Tabs */}
-            <div className="flex flex-wrap items-center gap-2 bg-stone-100 p-1.5 rounded-full border border-stone-200/60 self-start md:self-auto">
-              {[
-                { id: "all", label: "All Photos" },
-                { id: "pharmacy", label: "Pharmacy" },
-                { id: "store", label: "Supermarket" },
-                { id: "mall", label: "Shopping Mall" },
-              ].map((tab) => (
-                <button
-                  key={tab.id}
-                  onClick={() => setActiveTab(tab.id)}
-                  className={`px-4 py-2 rounded-full text-xs font-extrabold transition-all duration-200 ${
-                    activeTab === tab.id 
-                      ? "bg-white text-red-600 shadow-sm" 
-                      : "text-stone-600 hover:text-stone-900"
-                  }`}
-                >
-                  {tab.label}
-                </button>
-              ))}
-            </div>
+            <h2 className="text-3xl md:text-4xl font-black text-stone-900" style={{ fontFamily: "Manrope, sans-serif" }}>
+              A look inside Gozak
+            </h2>
           </div>
 
-          <motion.div layout className="grid grid-cols-2 md:grid-cols-4 gap-5">
-            <AnimatePresence>
-              {filteredGallery.map((img, i) => (
-                <motion.div
-                  layout
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.9 }}
-                  transition={{ duration: 0.3 }}
-                  key={img.title}
-                  className="group relative aspect-square rounded-3xl overflow-hidden bg-stone-100 shadow-sm border border-stone-200/80"
-                >
-                  <img
-                    src={img.src}
-                    alt={img.title}
-                    onError={(e) => { e.target.src = img.fallback; }}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-5">
-                    <span className="text-white font-extrabold text-xs leading-snug">
-                      {img.title}
-                    </span>
-                  </div>
-                </motion.div>
-              ))}
-            </AnimatePresence>
-          </motion.div>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
+            {galleryImages.map((img) => (
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.3 }}
+                key={img.title}
+                className="group relative aspect-square rounded-3xl overflow-hidden bg-stone-100 shadow-sm border border-stone-200/80"
+              >
+                <img
+                  src={img.src}
+                  alt={img.title}
+                  onError={(e) => { e.target.src = img.fallback; }}
+                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-5">
+                  <span className="text-white font-extrabold text-xs leading-snug">
+                    {img.title}
+                  </span>
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </div>
       </section>
     </>

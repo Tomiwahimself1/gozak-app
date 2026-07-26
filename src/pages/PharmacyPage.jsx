@@ -11,8 +11,13 @@ import { Reveal } from "../components/Reveal";
 import { Btn } from "../components/Btn";
 
 export default function PharmacyPage() {
-  const { setApptOpen } = useApp();
+  const { setPage } = useApp();
   const [selectedProduct, setSelectedProduct] = useState(null);
+
+  const goToContact = () => {
+    setPage("contact");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
 
   const cats = [
     { Icon: Pill, label: "Prescription Drugs", count: "320+ items", color: "from-red-500/10 to-rose-500/5", text: "text-red-500" },
@@ -150,7 +155,7 @@ export default function PharmacyPage() {
               transition={{ duration: 0.6, delay: 0.3 }}
               className="flex flex-wrap items-center gap-4 mt-8"
             >
-              <Btn variant="gold" icon={Calendar} onClick={() => setApptOpen(true)}>Book Appointment</Btn>
+              <Btn variant="gold" icon={Calendar} onClick={goToContact}>Book Appointment</Btn>
               <a
                 href="https://wa.me/2348111116110"
                 target="_blank"
@@ -336,7 +341,7 @@ export default function PharmacyPage() {
                 </div>
                 
                 <button 
-                  onClick={() => setApptOpen(true)} 
+                  onClick={goToContact} 
                   className="mt-6 text-xs font-extrabold flex items-center gap-1.5 transition-all text-red-500 hover:text-red-600 group-hover:gap-2"
                 >
                   Book this service <ArrowRight size={14} />
@@ -376,7 +381,7 @@ export default function PharmacyPage() {
           </div>
 
           <div className="text-center mt-14">
-            <Btn variant="gold" icon={Calendar} onClick={() => setApptOpen(true)}>Book an Appointment</Btn>
+            <Btn variant="gold" icon={Calendar} onClick={goToContact}>Book an Appointment</Btn>
           </div>
         </div>
       </section>
