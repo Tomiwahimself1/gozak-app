@@ -63,12 +63,14 @@ export default function HomePage() {
                 <Btn variant="primary" icon={ShoppingBag} onClick={() => setPage("about")}>Shop Now</Btn>
                 <Btn variant="gold" icon={Calendar} onClick={() => setApptOpen(true)}>Book Appointment</Btn>
                 <a
-                  href="https://wa.me/2348111116110"
-                  className="inline-flex items-center gap-2 font-bold text-sm px-6 py-3.5 rounded-full text-white transition hover:-translate-y-0.5"
-                  style={{ background: "#25D366", boxShadow: "0 10px 26px -6px rgba(37,211,102,0.45)" }}
-                >
-                  <MessageCircle size={16} /> WhatsApp
-                </a>
+  href="https://wa.me/2348146008685"
+  target="_blank"
+  rel="noopener noreferrer"
+  className="inline-flex items-center gap-2 font-bold text-sm px-6 py-3.5 rounded-full text-white transition hover:-translate-y-0.5"
+  style={{ background: "#25D366", boxShadow: "0 10px 26px -6px rgba(37,211,102,0.45)" }}
+>
+  <MessageCircle size={16} /> WhatsApp
+</a>
               </div>
             </Reveal>
           </div>
