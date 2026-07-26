@@ -42,8 +42,8 @@ export function Navbar() {
             >
               G
             </div>
-            <div className="font-extrabold text-lg" style={{ color: BRAND.dark, fontFamily: "Manrope, sans-serif" }}>
-              Gozak <span style={{ color: BRAND.red }}>&amp;</span> Co.
+            <div className="font-extrabold text-lg" style={{ color: BRAND.dark, fontFamily: "Manrope, sans-serif" }}> 
+              Gozak <span style={{ color: BRAND.red }}></span>
             </div>
           </button>
 

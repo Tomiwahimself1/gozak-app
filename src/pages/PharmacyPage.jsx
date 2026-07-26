@@ -99,26 +99,7 @@ export default function PharmacyPage() {
         Icon={Pill} 
       />
 
-      {/* Search Bar */}
-      <section className="py-8">
-        <div className="max-w-7xl mx-auto px-6">
-          <Reveal>
-            <div className="bg-white rounded-2xl border border-stone-100 p-4 flex flex-col md:flex-row gap-3 shadow-sm">
-              <div className="flex-1 flex items-center gap-3 px-4 py-2.5 rounded-xl bg-stone-50">
-                <Search size={17} className="text-stone-400" />
-                <input placeholder="Search medicines, health products, categories..." className="bg-transparent outline-none text-sm w-full" />
-              </div>
-              <select className="px-4 py-2.5 rounded-xl bg-stone-50 text-sm outline-none">
-                <option>All Categories</option>
-                <option>Prescription</option>
-                <option>OTC Medicines</option>
-                <option>Supplements</option>
-              </select>
-              <Btn variant="primary" icon={Search}>Search Stock</Btn>
-            </div>
-          </Reveal>
-        </div>
-      </section>
+     
 
       {/* Categories */}
       <section className="py-12">
