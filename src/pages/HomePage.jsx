@@ -231,7 +231,7 @@ export default function HomePage() {
       </section>
 
       {/* ================= PROMO STRIP ================= */}
-      <section className="py-28">
+      {/*<section className="py-28">
         <div className="max-w-7xl mx-auto px-6">
           <Reveal>
             <div className="rounded-3xl p-10 md:p-14 flex flex-col md:flex-row items-center justify-between gap-8 relative overflow-hidden" style={{ background: `linear-gradient(120deg, ${BRAND.gold}, ${BRAND.goldLight})` }}>
@@ -247,7 +247,7 @@ export default function HomePage() {
             </div>
           </Reveal>
         </div>
-      </section>
+      </section>*/}
 
       {/* ================= FOUNDER STORY ================= */}
       <section className="py-28 relative overflow-hidden" style={{ background: BRAND.dark }}>
@@ -319,7 +319,7 @@ export default function HomePage() {
       </section>
 
       {/* ================= NEWSLETTER ================= */}
-      <section className="pb-28">
+      {/*<section className="pb-28">
         <div className="max-w-7xl mx-auto px-6">
           <Reveal>
             <div className="rounded-3xl p-10 md:p-14 flex flex-col md:flex-row items-center justify-between gap-8" style={{ background: `linear-gradient(120deg, ${BRAND.red}, ${BRAND.redDark})` }}>
@@ -334,7 +334,7 @@ export default function HomePage() {
             </div>
           </Reveal>
         </div>
-      </section>
+      </section>*/}
     </>
   );
 }

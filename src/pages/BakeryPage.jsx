@@ -24,7 +24,7 @@ export default function BakeryPage() {
     {
       name: "GOZAK Super-Loaf",
       tag: "Best Seller",
-      desc: "Our signature flagship loaf — rich, fluffy, and stays oven-fresh soft for days.",
+      desc: "Our signature flagship loaf, rich, fluffy, and stays oven-fresh soft for days.",
       badgeColor: "bg-red-500 text-white",
       img: "/images/bakery/super-loaf.jpg",
       fallback: "https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=600&q=80",
@@ -40,7 +40,7 @@ export default function BakeryPage() {
     {
       name: "Chocolate Swirl Bread",
       tag: "Kids' Pick",
-      desc: "Infused with rich cocoa swirls — a sweet, delicious treat for breakfast or snacking.",
+      desc: "Infused with rich cocoa swirls, a sweet, delicious treat for breakfast or snacking.",
       badgeColor: "bg-amber-900 text-white",
       img: "/images/bakery/chocolate-bread.jpg",
       fallback: "https://images.unsplash.com/photo-1608198093002-ad4e005484ec?auto=format&fit=crop&w=600&q=80",
@@ -141,7 +141,7 @@ export default function BakeryPage() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="mt-6 text-base md:text-lg leading-relaxed text-amber-100 max-w-xl font-medium"
             >
-              From our signature GOZAK Super-Loaf to daily wholesale supply fleets — explore our bromate-free bread varieties and distributor network.
+              From our signature GOZAK Super-Loaf to daily wholesale supply fleets, explore our bromate-free bread varieties and distributor network.
             </motion.p>
 
             {/* CTAs */}

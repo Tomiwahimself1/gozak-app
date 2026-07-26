@@ -20,12 +20,12 @@ export default function PharmacyPage() {
   };
 
   const cats = [
-    { Icon: Pill, label: "Prescription Drugs", count: "320+ items", color: "from-red-500/10 to-rose-500/5", text: "text-red-500" },
-    { Icon: ClipboardList, label: "OTC Medicines", count: "210+ items", color: "from-amber-500/10 to-orange-500/5", text: "text-amber-600" },
-    { Icon: Baby, label: "Baby Care", count: "95+ items", color: "from-blue-500/10 to-sky-500/5", text: "text-blue-600" },
-    { Icon: HeartPulse, label: "Supplements", count: "160+ items", color: "from-emerald-500/10 to-teal-500/5", text: "text-emerald-600" },
-    { Icon: Syringe, label: "Medical Devices", count: "70+ items", color: "from-purple-500/10 to-violet-500/5", text: "text-purple-600" },
-    { Icon: Sparkles, label: "Personal Care", count: "140+ items", color: "from-pink-500/10 to-rose-500/5", text: "text-pink-500" },
+    { Icon: Pill, label: "Prescription Drugs", color: "from-red-500/10 to-rose-500/5", text: "text-red-500" },
+    { Icon: ClipboardList, label: "OTC Medicines",  color: "from-amber-500/10 to-orange-500/5", text: "text-amber-600" },
+    { Icon: Baby, label: "Baby Care", color: "from-blue-500/10 to-sky-500/5", text: "text-blue-600" },
+    { Icon: HeartPulse, label: "Supplements", color: "from-emerald-500/10 to-teal-500/5", text: "text-emerald-600" },
+    { Icon: Syringe, label: "Medical Devices", color: "from-purple-500/10 to-violet-500/5", text: "text-purple-600" },
+    { Icon: Sparkles, label: "Personal Care", color: "from-pink-500/10 to-rose-500/5", text: "text-pink-500" },
   ];
 
   const showcaseProducts = [
