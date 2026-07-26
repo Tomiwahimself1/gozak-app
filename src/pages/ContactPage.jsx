@@ -1,17 +1,71 @@
-import React from "react";
-import { MapPin, Phone, Mail, Clock, PhoneCall, Send } from "lucide-react";
+import React, { useState } from "react";
+import { MapPin, Phone, Mail, Clock, PhoneCall, Send, CheckCircle2 } from "lucide-react";
 import { BRAND } from "../lib/brand";
 import { Reveal } from "../components/Reveal";
 import { Btn } from "../components/Btn";
 import { PageHero } from "../components/Shared";
 
 export default function ContactPage() {
+  const [formData, setFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    message: "",
+  });
+
+  const [loading, setLoading] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+
   const info = [
     { Icon: MapPin, t: "Visit Us", d: "No.1 Adenikpekun Close, Akure Garage Roundabout, Ondo Town, Ondo State" },
     { Icon: Phone, t: "Call Us", d: "+234 811 111 6110" },
-    { Icon: Mail, t: "Email Us", d: "director@gozakonline.com" },
+    { Icon: Mail, t: "Email Us", d: "adedinsewoadetomiwa@gmail.com" },
     { Icon: Clock, t: "Opening Hours", d: "Mon – Sat: 8:00 AM – 9:00 PM · Sun: 10:00 AM – 6:00 PM" },
   ];
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+
+    // Prepare payload for Web3Forms API
+    const object = {
+      access_key: "25aa4e2f-49a1-4112-8921-d9612b1e596f", // <-- PASTE YOUR KEY FROM EMAIL HERE
+      subject: `New Inquiry from ${formData.firstName} ${formData.lastName}`,
+      from_name: `${formData.firstName} ${formData.lastName}`,
+      name: `${formData.firstName} ${formData.lastName}`,
+      email: formData.email,
+      phone: formData.phone,
+      message: formData.message,
+    };
+
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify(object),
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        setSubmitted(true);
+      } else {
+        alert("Failed to send message. Please try again.");
+      }
+    } catch (error) {
+      alert("Something went wrong. Please check your network and try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <>
@@ -48,16 +102,66 @@ export default function ContactPage() {
             <div className="bg-white rounded-3xl border border-stone-100 p-9 shadow-sm">
               <h3 className="text-xl font-extrabold" style={{ color: BRAND.dark }}>Send us a message</h3>
               <p className="text-sm text-stone-500 mt-1.5">We typically respond within a few hours.</p>
-              <form className="mt-7 space-y-4" onSubmit={(e) => e.preventDefault()}>
-                <div className="grid grid-cols-2 gap-4">
-                  <input placeholder="First name" className="px-4 py-3 rounded-xl border border-stone-200 outline-none text-sm" />
-                  <input placeholder="Last name" className="px-4 py-3 rounded-xl border border-stone-200 outline-none text-sm" />
+
+              {submitted ? (
+                <div className="mt-8 p-8 rounded-2xl bg-green-50 border border-green-200 text-center">
+                  <CheckCircle2 size={42} className="text-green-600 mx-auto mb-3" />
+                  <h4 className="font-extrabold text-green-900 text-lg">Message Sent Successfully!</h4>
+                  <p className="text-sm text-green-700 mt-1">Thank you for reaching out. We will get back to you shortly.</p>
                 </div>
-                <input placeholder="Email address" type="email" className="w-full px-4 py-3 rounded-xl border border-stone-200 outline-none text-sm" />
-                <input placeholder="Phone number" type="tel" className="w-full px-4 py-3 rounded-xl border border-stone-200 outline-none text-sm" />
-                <textarea placeholder="Your message" rows={4} className="w-full px-4 py-3 rounded-xl border border-stone-200 outline-none text-sm resize-none" />
-                <Btn variant="primary" className="w-full" icon={Send}>Send Message</Btn>
-              </form>
+              ) : (
+                <form className="mt-7 space-y-4" onSubmit={handleSubmit}>
+                  <div className="grid grid-cols-2 gap-4">
+                    <input
+                      name="firstName"
+                      value={formData.firstName}
+                      onChange={handleChange}
+                      placeholder="First name"
+                      required
+                      className="px-4 py-3 rounded-xl border border-stone-200 outline-none text-sm focus:border-red-500 transition"
+                    />
+                    <input
+                      name="lastName"
+                      value={formData.lastName}
+                      onChange={handleChange}
+                      placeholder="Last name"
+                      required
+                      className="px-4 py-3 rounded-xl border border-stone-200 outline-none text-sm focus:border-red-500 transition"
+                    />
+                  </div>
+                  <input
+                    name="email"
+                    type="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    placeholder="Email address"
+                    required
+                    className="w-full px-4 py-3 rounded-xl border border-stone-200 outline-none text-sm focus:border-red-500 transition"
+                  />
+                  <input
+                    name="phone"
+                    type="tel"
+                    value={formData.phone}
+                    onChange={handleChange}
+                    placeholder="Phone number"
+                    required
+                    className="w-full px-4 py-3 rounded-xl border border-stone-200 outline-none text-sm focus:border-red-500 transition"
+                  />
+                  <textarea
+                    name="message"
+                    value={formData.message}
+                    onChange={handleChange}
+                    placeholder="Your message"
+                    rows={4}
+                    required
+                    className="w-full px-4 py-3 rounded-xl border border-stone-200 outline-none text-sm resize-none focus:border-red-500 transition"
+                  />
+
+                  <Btn type="submit" variant="primary" className="w-full" icon={Send} disabled={loading}>
+                    {loading ? "Sending Message..." : "Send Message"}
+                  </Btn>
+                </form>
+              )}
             </div>
           </Reveal>
         </div>
