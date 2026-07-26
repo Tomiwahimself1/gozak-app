@@ -180,14 +180,36 @@ export default function HomePage() {
         <div className="max-w-7xl mx-auto px-6">
           <SectionHead eyebrow="Featured" title="Shop by category" desc="Everything on our shelves, organized the way you shop." />
           <div className="grid grid-cols-2 md:grid-cols-4 gap-5 auto-rows-[190px]">
+            
+            {/* Featured Image Box */}
             <Reveal className="col-span-2 row-span-2">
-              <div className="h-full rounded-3xl p-7 flex flex-col justify-end relative overflow-hidden" style={{ background: `linear-gradient(150deg, ${BRAND.red}, ${BRAND.redDark})` }}>
-                <div className="absolute -right-8 -top-8 w-40 h-40 rounded-full bg-white/10 anim-float-slow" />
-                <div className="w-12 h-12 rounded-xl flex items-center justify-center bg-white/20 text-white mb-auto"><Stethoscope size={22} /></div>
-                <h4 className="text-white font-extrabold text-lg">Telemedicine &amp; Consultation</h4>
-                <span className="text-white/80 text-sm mt-1">Talk to a pharmacist or book a doctor visit, online or in-store.</span>
+              <div className="h-full rounded-3xl p-7 flex flex-col justify-end relative overflow-hidden shadow-lg group">
+                <img 
+                  src="/images/pharmacy-consultation.jpg" 
+                  alt="Gozak Pharmacy Care"
+                  onError={(e) => {
+                    e.target.src = "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=800&q=80";
+                  }}
+                  className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+                />
+                
+                {/* Red Gradient Overlay */}
+                <div 
+                  className="absolute inset-0" 
+                  style={{ background: `linear-gradient(180deg, rgba(193,18,31,0.2) 0%, rgba(130,10,20,0.88) 100%)` }} 
+                />
+
+                {/* Content */}
+                <div className="relative z-10">
+                  <div className="w-12 h-12 rounded-xl flex items-center justify-center bg-white/20 backdrop-blur-md text-white mb-4">
+                    <Stethoscope size={22} />
+                  </div>
+                  <h4 className="text-white font-extrabold text-xl">Telemedicine &amp; Consultation</h4>
+                  <span className="text-white/90 text-sm mt-1 block">Talk to a pharmacist or book a doctor visit, online or in-store.</span>
+                </div>
               </div>
             </Reveal>
+
             {[
               { Icon: ShoppingBasket, t: "Groceries", d: "Fresh & pantry staples" },
               { Icon: Smartphone, t: "Mobile Phones", d: "Latest devices & accessories" },
