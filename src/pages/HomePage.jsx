@@ -10,6 +10,7 @@ import { Reveal, Counter } from "../components/Reveal";
 import { Btn } from "../components/Btn";
 import { Eyebrow, SectionHead } from "../components/Shared";
 
+
 export default function HomePage() {
   const { setApptOpen, setPage } = useApp();
   const [testi, setTesti] = useState(0);
