@@ -61,7 +61,7 @@ export function Navbar() {
               fontFamily: "Manrope, sans-serif",
             }}
           >
-            Gozak
+            Gozak Shopping Mall
           </div>
         </button>
 

@@ -18,7 +18,7 @@ export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
 
   const info = [
-    { Icon: MapPin, t: "Visit Us", d: "No.1 Adenikpekun Close, Akure Garage Roundabout, Ondo Town, Ondo State" },
+    { Icon: MapPin, t: "Visit Us", d: "Ago Itunu, Yaba, Ondo Town, Ondo State" },
     { Icon: Phone, t: "Call Us", d: "+234 811 111 6110" },
     { Icon: Mail, t: "Email Us", d: "adedinsewoadetomiwa@gmail.com" },
     { Icon: Clock, t: "Opening Hours", d: "Mon – Sat: 8:00 AM – 9:00 PM · Sun: 10:00 AM – 6:00 PM" },
@@ -34,7 +34,7 @@ export default function ContactPage() {
 
     // Prepare payload for Web3Forms API
     const object = {
-      access_key: "25aa4e2f-49a1-4112-8921-d9612b1e596f", // <-- PASTE YOUR KEY FROM EMAIL HERE
+      access_key: "25aa4e2f-49a1-4112-8921-d9612b1e596f",
       subject: `New Inquiry from ${formData.firstName} ${formData.lastName}`,
       from_name: `${formData.firstName} ${formData.lastName}`,
       name: `${formData.firstName} ${formData.lastName}`,
@@ -83,12 +83,19 @@ export default function ContactPage() {
                 </div>
               ))}
             </div>
-            <div className="rounded-2xl overflow-hidden border border-stone-100 h-64 relative" style={{ background: "linear-gradient(150deg, rgba(193,18,31,0.12), rgba(244,161,0,0.15))" }}>
-              <div className="absolute inset-0 flex items-center justify-center flex-col gap-2">
-                <MapPin size={30} color={BRAND.red} />
-                <span className="text-sm font-bold" style={{ color: BRAND.dark }}>Interactive map — Akure Garage Roundabout</span>
-              </div>
+
+            {/* Embedded Interactive Google Map for Ago Itunu, Yaba, Ondo */}
+            <div className="rounded-2xl overflow-hidden border border-stone-100 h-64 relative shadow-sm">
+              <iframe
+                title="Gozak Pharmacy & Supermarket Location"
+                src="https://maps.google.com/maps?q=Ago%20Itunu%20Yaba%20Ondo%20Town%20Ondo%20State&t=&z=16&ie=UTF8&iwloc=&output=embed"
+                className="w-full h-full border-0"
+                allowFullScreen=""
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+              />
             </div>
+
             <div className="mt-6 flex items-center gap-3 rounded-2xl p-5" style={{ background: "rgba(193,18,31,0.05)" }}>
               <PhoneCall size={20} color={BRAND.red} />
               <div>
