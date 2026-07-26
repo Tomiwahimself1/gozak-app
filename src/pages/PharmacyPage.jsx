@@ -157,7 +157,7 @@ export default function PharmacyPage() {
             >
               <Btn variant="gold" icon={Calendar} onClick={goToContact}>Book Appointment</Btn>
               <a
-                href="https://wa.me/2348111116110"
+                href="https://wa.me/2348146008685"
                 target="_blank"
                 rel="noreferrer"
                 className="inline-flex items-center gap-2 font-bold text-sm px-6 py-3.5 rounded-full bg-emerald-600 hover:bg-emerald-500 text-white transition shadow-lg shadow-black/10 hover:-translate-y-0.5"
@@ -473,7 +473,7 @@ export default function PharmacyPage() {
 
                 <div className="mt-6 pt-5 border-t border-stone-100 flex flex-col sm:flex-row gap-3">
                   <a 
-                    href="https://wa.me/2348111116110" 
+                    href="https://wa.me/2348146008685" 
                     target="_blank" 
                     rel="noreferrer" 
                     className="flex-1 bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs py-3.5 rounded-xl flex items-center justify-center gap-2 transition shadow-md shadow-emerald-600/20"
