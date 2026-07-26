@@ -13,11 +13,13 @@ import AboutPage from "./pages/AboutPage";
 import PharmacyPage from "./pages/PharmacyPage";
 import ContactPage from "./pages/ContactPage";
 import AdminPage from './pages/AdminPage';
+import BakeryPage from "./pages/BakeryPage";
 
 const PAGE_COMPONENTS = {
   home: HomePage,
   about: AboutPage,
   pharmacy: PharmacyPage,
+  bakery: BakeryPage,
   contact: ContactPage,
   admin: AdminPage,
 };
