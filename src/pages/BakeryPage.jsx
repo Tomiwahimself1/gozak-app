@@ -59,7 +59,7 @@ export default function BakeryPage() {
   const processSteps = [
     {
       step: "01",
-      title: "Precision Mixing & Kneading",
+      title: "Kneading",
       desc: "High-grade wheat flour mixed under strict hygiene standards for maximum softness.",
       img: "/images/bakery/mixing.jpg",
       fallback: "https://images.unsplash.com/photo-1556910103-1c02745aae4d?auto=format&fit=crop&w=600&q=80",
@@ -73,7 +73,7 @@ export default function BakeryPage() {
     },
     {
       step: "03",
-      title: "Fleet Loading & Dispatch",
+      title: "Fleet Loading",
       desc: "Loaded straight into delivery trucks to supply depots, shops, and vendors across Ondo State.",
       img: "/images/bakery/truck-loading.jpg",
       fallback: "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=600&q=80",
@@ -363,7 +363,7 @@ export default function BakeryPage() {
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none" />
               <div className="absolute bottom-6 left-6 right-6 pointer-events-none">
                 <div className="text-amber-400 font-black text-xs uppercase tracking-wider">Hygienic Bakery Hall</div>
-                <div className="text-white font-extrabold text-lg mt-0.5">Automated Kneading &amp; Flour Processing</div>
+                <div className="text-white font-extrabold text-lg mt-0.5">Automated Kneading &amp; Flour Processing & dispatch</div>
               </div>
             </motion.div>
           </div>
