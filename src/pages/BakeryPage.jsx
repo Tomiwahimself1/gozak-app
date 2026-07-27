@@ -340,22 +340,28 @@ export default function BakeryPage() {
               </div>
             </motion.div>
 
-            {/* Featured Image Frame */}
+            {/* Featured Video Frame */}
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="relative aspect-video rounded-3xl overflow-hidden border border-white/10 shadow-2xl group"
+              className="relative aspect-video rounded-3xl overflow-hidden border border-white/10 shadow-2xl group bg-stone-900"
             >
-              <img
-                src="/images/bakery/mixing.jpg"
-                alt="Flour Mixing and Production"
-                onError={(e) => { e.target.src = "https://images.unsplash.com/photo-1556910103-1c02745aae4d?auto=format&fit=crop&w=800&q=80"; }}
+              <video
+                autoPlay
+                loop
+                muted
+                playsInline
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-              <div className="absolute bottom-6 left-6 right-6">
+              >
+                {/* Change this path to your actual video location inside public folder */}
+                <source src="/videos/bakery-production.mp4" type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+              
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none" />
+              <div className="absolute bottom-6 left-6 right-6 pointer-events-none">
                 <div className="text-amber-400 font-black text-xs uppercase tracking-wider">Hygienic Bakery Hall</div>
                 <div className="text-white font-extrabold text-lg mt-0.5">Automated Kneading &amp; Flour Processing</div>
               </div>
