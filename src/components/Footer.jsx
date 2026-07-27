@@ -10,9 +10,17 @@ export function Footer() {
       <div className="max-w-7xl mx-auto px-6">
         <div className="grid md:grid-cols-4 gap-10 pb-12 border-b border-white/10">
           <div>
-            <div className="flex items-center gap-2.5">
-              <div className="w-10 h-10 rounded-xl flex items-center justify-center text-white font-extrabold text-lg" style={{ background: `linear-gradient(135deg, ${BRAND.red}, ${BRAND.gold})` }}>G</div>
-              <div className="font-extrabold text-lg text-white" style={{ fontFamily: "Manrope, sans-serif" }}>Gozak &amp; Co.</div>
+            <div className="flex items-center gap-3">
+              {/* Header-matching red circle logo */}
+              <div 
+                className="w-10 h-10 rounded-full flex items-center justify-center text-white font-extrabold text-lg shadow-sm" 
+                style={{ background: BRAND.red }}
+              >
+                G
+              </div>
+              <div className="font-extrabold text-lg text-white" style={{ fontFamily: "Manrope, sans-serif" }}>
+                Gozak Shopping Mall
+              </div>
             </div>
             <p className="text-sm mt-4 leading-relaxed max-w-xs text-white/50">
               Trusted Pharmacy Care &amp; Everyday Essentials Under One Roof. Serving Ondo State since 2012.
@@ -43,7 +51,7 @@ export function Footer() {
             <h5 className="text-white font-bold text-sm mb-4">Visit Us</h5>
             <p className="text-sm leading-loose text-white/50">
               No.1 Adenikpekun Close<br />Akure Garage Roundabout<br />Ondo Town, Ondo State<br /><br />
-              +234 811 111 6110<br />director@gozakonline.com
+              +234 814 600 8685<br />director@gozakonline.com
             </p>
           </div>
         </div>
@@ -58,7 +66,13 @@ export function Footer() {
 
 export function WhatsAppFloat() {
   return (
-    <a href="https://wa.me/2348111116110" className="fixed right-6 bottom-6 z-90 w-14 h-14 rounded-full flex items-center justify-center text-white anim-pulsering" style={{ background: "#25D366" }}>
+    <a 
+      href="https://wa.me/2348146008685" 
+      target="_blank" 
+      rel="noopener noreferrer" 
+      className="fixed right-6 bottom-6 z-50 w-14 h-14 rounded-full flex items-center justify-center text-white anim-pulsering shadow-lg" 
+      style={{ background: "#25D366" }}
+    >
       <MessageCircle size={26} fill="white" />
     </a>
   );
