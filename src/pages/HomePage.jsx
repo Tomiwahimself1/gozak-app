@@ -48,7 +48,7 @@ export default function HomePage() {
               <h1 className="text-4xl md:text-6xl font-extrabold leading-[1.05]" style={{ fontFamily: "Manrope, sans-serif", color: BRAND.dark }}>
                 Trusted{" "}
                 <span style={{ background: `linear-gradient(100deg, ${BRAND.red}, ${BRAND.gold} 65%)`, WebkitBackgroundClip: "text", backgroundClip: "text", color: "transparent" }}>
-                  pharmacy care
+                  weekly groceries, pharmacy care
                 </span>{" "}
                 &amp; everyday essentials, under one roof.
               </h1>

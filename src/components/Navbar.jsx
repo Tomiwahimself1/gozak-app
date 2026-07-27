@@ -3,6 +3,35 @@ import { Menu, X, Calendar } from "lucide-react";
 import { BRAND } from "../lib/brand";
 import { useApp, NAV_ITEMS } from "../context/AppContext";
 
+// Custom Emblem SVG modeled directly from the Gozak Shopping Mall building sign
+function GozakBuildingLogo({ className = "w-10 h-10" }) {
+  return (
+    <svg 
+      viewBox="0 0 100 100" 
+      className={className} 
+      fill="none" 
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      {/* Outer Circle Ring */}
+      <circle cx="50" cy="50" r="45" stroke="#C1121F" strokeWidth="7" fill="#FFFFFF" />
+      
+      {/* Central 'G' Letterform */}
+      <path 
+        d="M 68 35 C 62 25 48 22 35 30 C 22 38 20 58 30 70 C 40 82 60 82 70 70 C 76 63 76 52 76 52 L 50 52 L 50 60 L 67 60 C 66 66 60 72 50 72 C 38 72 30 62 30 50 C 30 38 40 30 52 30 C 60 30 65 34 68 38 Z" 
+        fill="#C1121F" 
+      />
+      
+      {/* Accent Orbit Arc */}
+      <path 
+        d="M 25 32 C 38 18 68 18 82 32" 
+        stroke="#F4A100" 
+        strokeWidth="6" 
+        strokeLinecap="round" 
+      />
+    </svg>
+  );
+}
+
 export function Navbar() {
   const { page, setPage } = useApp();
   const [scrolled, setScrolled] = useState(false);
@@ -43,16 +72,10 @@ export function Navbar() {
       }}
     >
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
-        {/* Brand Logo */}
-        <button onClick={() => go("home")} className="flex items-center gap-2.5">
-          <div
-            className="w-10 h-10 rounded-xl flex items-center justify-center text-white font-extrabold text-lg shadow-md"
-            style={{
-              background: `linear-gradient(135deg, ${BRAND.red}, ${BRAND.gold})`,
-              fontFamily: "Manrope, sans-serif",
-            }}
-          >
-            G
+        {/* Brand Logo with Building Emblem */}
+        <button onClick={() => go("home")} className="flex items-center gap-2.5 outline-none group">
+          <div className="transition-transform duration-300 group-hover:scale-105 shadow-md rounded-full">
+            <GozakBuildingLogo className="w-10 h-10" />
           </div>
           <div
             className="font-extrabold text-lg transition-colors"
