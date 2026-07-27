@@ -19,7 +19,7 @@ export default function ContactPage() {
 
   const info = [
     { Icon: MapPin, t: "Visit Us", d: "Ago Itunu, Yaba, Ondo Town, Ondo State" },
-    { Icon: Phone, t: "Call Us", d: "+234 811 111 6110" },
+    { Icon: Phone, t: "Call Us", d: "+234 814 600 8685" },
     { Icon: Mail, t: "Email Us", d: "adedinsewoadetomiwa@gmail.com" },
     { Icon: Clock, t: "Opening Hours", d: "Mon – Sat: 8:00 AM – 9:00 PM · Sun: 10:00 AM – 6:00 PM" },
   ];
