@@ -158,7 +158,7 @@ export default function BakeryPage() {
                 <ShoppingBag size={18} /> Explore Breads
               </a>
               <a
-                href="https://wa.me/2348111116110?text=Hello,%20I%20want%20to%20order%20breads%20from%20Gozak%20Bakery."
+                href="https://wa.me/2348146008685?text=Hello,%20I%20want%20to%20order%20breads%20from%20Gozak%20Bakery."
                 target="_blank"
                 rel="noreferrer"
                 className="inline-flex items-center gap-2 font-bold text-sm px-6 py-3.5 rounded-full bg-white/10 hover:bg-white/20 text-white backdrop-blur-md border border-white/20 transition shadow-lg hover:-translate-y-0.5"
@@ -469,7 +469,7 @@ export default function BakeryPage() {
             </div>
 
             <a
-              href="https://wa.me/2348111116110?text=Hello,%20I%20am%20interested%20in%20becoming%20a%20Gozak%20Bread%20distributor."
+              href="https://wa.me/2348146008685?text=Hello,%20I%20am%20interested%20in%20becoming%20a%20Gozak%20Bread%20distributor."
               target="_blank"
               rel="noreferrer"
               className="px-8 py-4 rounded-full bg-white font-extrabold text-sm text-red-600 hover:bg-stone-100 hover:-translate-y-0.5 transition flex-shrink-0 shadow-lg relative z-10 flex items-center gap-2"
