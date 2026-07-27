@@ -152,14 +152,14 @@ export default function AboutPage() {
             </motion.div>
           </div>
 
-          {/* Hero Feature Graphic Container */}
+          {/* Hero Feature Graphic Container (Now visible on mobile and desktop) */}
           <motion.div 
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="relative hidden lg:block"
+            className="relative block mt-6 lg:mt-0"
           >
-            <div className="relative rounded-3xl overflow-hidden border border-white/10 bg-stone-900/60 p-8 backdrop-blur-xl shadow-2xl">
+            <div className="relative rounded-3xl overflow-hidden border border-white/10 bg-stone-900/60 p-5 sm:p-8 backdrop-blur-xl shadow-2xl">
               <div className="aspect-[4/3] rounded-2xl overflow-hidden relative mb-6 border border-white/10">
                 <img 
                   src="/images/mall/mall-1.jpg" 
