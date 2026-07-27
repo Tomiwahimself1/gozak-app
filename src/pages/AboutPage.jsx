@@ -24,46 +24,39 @@ export default function AboutPage() {
     { Icon: Building2, label: "Home Appliances", count: "75+ items" },
   ];
 
+  // UPDATE THESE FILE NAMES TO MATCH EXACTLY WHAT IS IN YOUR public/images/ FOLDER
   const galleryImages = [
     {
-      title: "Main Mall Atrium",
-      src: "/images/mall/mall-1.jpg",
-      fallback: "https://images.unsplash.com/photo-1519567241046-7f570eee3ce6?auto=format&fit=crop&w=600&q=80",
+      title: "Store Interior Aisle 1",
+      src: "/images/store-1.jpg",
     },
     {
-      title: "Pharmacy & Wellness Counter",
-      src: "/images/mall/mall-2.jpg",
-      fallback: "https://images.unsplash.com/photo-1586015555751-63bb77f4322a?auto=format&fit=crop&w=600&q=80",
+      title: "Pharmacy Counter",
+      src: "/images/pharmacy.jpg",
     },
     {
-      title: "Electronics & Gadgets Hub",
-      src: "/images/mall/mall-3.jpg",
-      fallback: "https://images.unsplash.com/photo-1526738549149-8e07eca6c147?auto=format&fit=crop&w=600&q=80",
+      title: "Store Interior Aisle 2",
+      src: "/images/store-2.jpg",
     },
     {
-      title: "Supermarket Aisles",
-      src: "/images/mall/mall-4.jpg",
-      fallback: "https://images.unsplash.com/photo-1578916171728-46686eac8d58?auto=format&fit=crop&w=600&q=80",
+      title: "Supermarket Section",
+      src: "/images/supermarket.jpg",
     },
     {
-      title: "Fashion & Lifestyle Store",
-      src: "/images/mall/mall-5.jpg",
-      fallback: "https://images.unsplash.com/photo-1441986300917-64674bd600d8?auto=format&fit=crop&w=600&q=80",
+      title: "Fashion & Lifestyle",
+      src: "/images/fashion.jpg",
     },
     {
-      title: "Beauty & Cosmetics Display",
-      src: "/images/mall/mall-6.jpg",
-      fallback: "https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?auto=format&fit=crop&w=600&q=80",
+      title: "Beauty & Cosmetics",
+      src: "/images/cosmetics.jpg",
     },
     {
-      title: "Home Appliances Showcase",
-      src: "/images/mall/mall-7.jpg",
-      fallback: "https://images.unsplash.com/photo-1556911220-e15b29be8c8f?auto=format&fit=crop&w=600&q=80",
+      title: "Household & Bakery",
+      src: "/images/bakery.jpg",
     },
     {
       title: "Customer Support Desk",
-      src: "/images/mall/mall-8.jpg",
-      fallback: "https://images.unsplash.com/photo-1556740758-90de374c12ad?auto=format&fit=crop&w=600&q=80",
+      src: "/images/support.jpg",
     },
   ];
 
@@ -152,9 +145,8 @@ export default function AboutPage() {
             <div className="relative rounded-3xl overflow-hidden border border-white/10 bg-stone-900/60 p-8 backdrop-blur-xl shadow-2xl">
               <div className="aspect-[4/3] rounded-2xl overflow-hidden relative mb-6 border border-white/10">
                 <img 
-                  src="/images/mall/mall-1.jpg" 
+                  src="/images/store-1.jpg" 
                   alt="Gozak Mall Atrium"
-                  onError={(e) => { e.target.src = "https://images.unsplash.com/photo-1519567241046-7f570eee3ce6?auto=format&fit=crop&w=800&q=80"; }}
                   className="w-full h-full object-cover"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
@@ -330,7 +322,7 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* ================= GALLERY SECTION (Without Filter Navbar) ================= */}
+      {/* ================= GALLERY SECTION ================= */}
       <section className="py-24 bg-white">
         <div className="max-w-7xl mx-auto px-6">
           <div className="mb-12">
@@ -344,19 +336,18 @@ export default function AboutPage() {
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-5">
-            {galleryImages.map((img) => (
+            {galleryImages.map((img, i) => (
               <motion.div
                 initial={{ opacity: 0, scale: 0.95 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.3 }}
-                key={img.title}
+                key={i}
                 className="group relative aspect-square rounded-3xl overflow-hidden bg-stone-100 shadow-sm border border-stone-200/80"
               >
                 <img
                   src={img.src}
                   alt={img.title}
-                  onError={(e) => { e.target.src = img.fallback; }}
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-5">
