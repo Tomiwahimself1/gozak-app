@@ -10,7 +10,6 @@ import { Reveal, Counter } from "../components/Reveal";
 import { Btn } from "../components/Btn";
 import { Eyebrow, SectionHead } from "../components/Shared";
 
-
 export default function HomePage() {
   const { setApptOpen, setPage } = useApp();
   const [testi, setTesti] = useState(0);
@@ -29,6 +28,22 @@ export default function HomePage() {
 
   return (
     <>
+      {/* Dynamic Keyframe Animation for Marquee */}
+      <style>{`
+        @keyframes customMarquee {
+          0% { transform: translateX(0%); }
+          100% { transform: translateX(-50%); }
+        }
+        .animate-marquee-smooth {
+          display: flex;
+          width: max-content;
+          animation: customMarquee 20s linear infinite;
+        }
+        .animate-marquee-smooth:hover {
+          animation-play-state: paused;
+        }
+      `}</style>
+
       {/* ================= HERO ================= */}
       <header
         className="relative pt-40 md:pt-48 pb-24 overflow-hidden"
@@ -63,29 +78,30 @@ export default function HomePage() {
                 <Btn variant="primary" icon={ShoppingBag} onClick={() => setPage("about")}>Shop Now</Btn>
                 <Btn variant="gold" icon={Calendar} onClick={() => setApptOpen(true)}>Book Appointment</Btn>
                 <a
-  href="https://wa.me/2348146008685"
-  target="_blank"
-  rel="noopener noreferrer"
-  className="inline-flex items-center gap-2 font-bold text-sm px-6 py-3.5 rounded-full text-white transition hover:-translate-y-0.5"
-  style={{ background: "#25D366", boxShadow: "0 10px 26px -6px rgba(37,211,102,0.45)" }}
->
-  <MessageCircle size={16} /> WhatsApp
-</a>
+                  href="https://wa.me/2348146008685"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 font-bold text-sm px-6 py-3.5 rounded-full text-white transition hover:-translate-y-0.5"
+                  style={{ background: "#25D366", boxShadow: "0 10px 26px -6px rgba(37,211,102,0.45)" }}
+                >
+                  <MessageCircle size={16} /> WhatsApp
+                </a>
               </div>
             </Reveal>
           </div>
 
-          {/* Supermarket Video Container */}
-          <Reveal delay={150} scale className="relative h-[440px] hidden md:block">
+          {/* Supermarket Video Container (Fixed for Mobile & Desktop) */}
+          <Reveal delay={150} scale className="relative h-[360px] md:h-[440px] block">
             <div
               className="absolute inset-0 rounded-[28px] overflow-hidden flex items-center justify-center bg-black border border-white/20"
               style={{ boxShadow: "0 30px 70px -22px rgba(90,10,14,0.5)" }}
             >
               <video 
-                controls 
                 autoPlay 
                 muted 
                 loop 
+                playsInline
+                preload="auto"
                 className="w-full h-full object-cover rounded-[28px]"
               >
                 <source src="/videos/supermarket-tour.mp4" type="video/mp4" />
@@ -94,7 +110,7 @@ export default function HomePage() {
             </div>
 
             {/* Floating Open Now Badge */}
-            <div className="absolute top-6 -left-6 bg-white/90 backdrop-blur-md rounded-2xl px-5 py-3.5 shadow-2xl flex items-center gap-3 anim-float z-10">
+            <div className="absolute top-4 left-2 md:top-6 md:-left-6 bg-white/90 backdrop-blur-md rounded-2xl px-4 py-2.5 md:px-5 md:py-3.5 shadow-2xl flex items-center gap-3 anim-float z-10">
               <span className="w-2.5 h-2.5 rounded-full anim-pulsering" style={{ background: "#10B981" }} />
               <div>
                 <div className="text-xs font-bold" style={{ color: BRAND.dark }}>Open Now</div>
@@ -103,7 +119,7 @@ export default function HomePage() {
             </div>
 
             {/* Floating Address Badge */}
-            <div className="absolute bottom-6 -right-5 bg-white/90 backdrop-blur-md rounded-2xl px-5 py-3.5 shadow-2xl max-w-[230px] z-10" style={{ animation: "floatSlow 6s ease-in-out infinite reverse" }}>
+            <div className="absolute bottom-4 right-2 md:bottom-6 md:-right-5 bg-white/90 backdrop-blur-md rounded-2xl px-4 py-2.5 md:px-5 md:py-3.5 shadow-2xl max-w-[210px] md:max-w-[230px] z-10" style={{ animation: "floatSlow 6s ease-in-out infinite reverse" }}>
               <div className="flex items-center gap-2 text-xs font-bold" style={{ color: BRAND.dark }}>
                 <ShoppingBasket size={14} color={BRAND.red} /> No.1 Adenikpekun Close
               </div>
@@ -112,11 +128,12 @@ export default function HomePage() {
           </Reveal>
         </div>
 
+        {/* Brand Logos Marquee (Fixed for Mobile & Desktop) */}
         <Reveal delay={400}>
           <div className="mt-20 overflow-hidden relative" style={{ maskImage: "linear-gradient(90deg, transparent, black 10%, black 90%, transparent)" }}>
-            <div className="flex gap-16 marquee-track w-max">
-              {[...brands, ...brands, ...brands].map((b, i) => (
-                <span key={i} className="text-xl font-extrabold whitespace-nowrap" style={{ color: "rgba(36,21,5,0.25)", fontFamily: "Manrope, sans-serif" }}>{b}</span>
+            <div className="animate-marquee-smooth flex gap-12 md:gap-16">
+              {[...brands, ...brands, ...brands, ...brands].map((b, i) => (
+                <span key={i} className="text-lg md:text-xl font-extrabold whitespace-nowrap" style={{ color: "rgba(36,21,5,0.35)", fontFamily: "Manrope, sans-serif" }}>{b}</span>
               ))}
             </div>
           </div>
@@ -232,25 +249,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ================= PROMO STRIP ================= */}
-      {/*<section className="py-28">
-        <div className="max-w-7xl mx-auto px-6">
-          <Reveal>
-            <div className="rounded-3xl p-10 md:p-14 flex flex-col md:flex-row items-center justify-between gap-8 relative overflow-hidden" style={{ background: `linear-gradient(120deg, ${BRAND.gold}, ${BRAND.goldLight})` }}>
-              <div className="absolute -left-10 -bottom-16 w-56 h-56 rounded-full bg-white/20 anim-blob" />
-              <div className="relative">
-                <div className="inline-flex items-center gap-2 text-xs font-bold px-3 py-1.5 rounded-full bg-white/40 mb-3" style={{ color: BRAND.dark }}>
-                  <Percent size={13} /> Latest Promotion
-                </div>
-                <h3 className="text-2xl md:text-3xl font-extrabold" style={{ color: BRAND.dark, fontFamily: "Manrope, sans-serif" }}>15% off all supplements this week</h3>
-                <p className="text-sm mt-2" style={{ color: "rgba(28,16,6,0.7)" }}>Valid in-store and online. While stocks last.</p>
-              </div>
-              <Btn variant="dark" icon={ArrowRight}>Shop Promotions</Btn>
-            </div>
-          </Reveal>
-        </div>
-      </section>*/}
-
       {/* ================= FOUNDER STORY ================= */}
       <section className="py-28 relative overflow-hidden" style={{ background: BRAND.dark }}>
         <div className="max-w-7xl mx-auto px-6 grid lg:grid-cols-[0.85fr_1.15fr] gap-16 items-center">
@@ -319,24 +317,6 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
-      {/* ================= NEWSLETTER ================= */}
-      {/*<section className="pb-28">
-        <div className="max-w-7xl mx-auto px-6">
-          <Reveal>
-            <div className="rounded-3xl p-10 md:p-14 flex flex-col md:flex-row items-center justify-between gap-8" style={{ background: `linear-gradient(120deg, ${BRAND.red}, ${BRAND.redDark})` }}>
-              <div>
-                <h3 className="text-2xl md:text-3xl font-extrabold text-white" style={{ fontFamily: "Manrope, sans-serif" }}>Health tips &amp; promotions, delivered.</h3>
-                <p className="text-sm mt-2 text-white/75 max-w-md">Join our newsletter for medication reminders, weekly promotions and community health tips.</p>
-              </div>
-              <form className="flex gap-2.5 w-full md:w-auto" onSubmit={(e) => e.preventDefault()}>
-                <input type="email" placeholder="you@email.com" className="px-5 py-3.5 rounded-full bg-white/10 border border-white/30 text-white placeholder-white/60 outline-none text-sm flex-1 md:w-64" />
-                <button className="px-6 py-3.5 rounded-full bg-white font-extrabold text-sm hover:-translate-y-0.5 transition" style={{ color: BRAND.red }}>Subscribe</button>
-              </form>
-            </div>
-          </Reveal>
-        </div>
-      </section>*/}
     </>
   );
 }
