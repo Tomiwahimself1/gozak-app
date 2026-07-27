@@ -11,14 +11,14 @@ export function Footer() {
         <div className="grid md:grid-cols-4 gap-10 pb-12 border-b border-white/10">
           <div>
             <div className="flex items-center gap-3">
-              {/* Header-matching red circle logo */}
+              {/* Header-matching Emblem: White circle background, red border, red 'G' */}
               <div 
-                className="w-10 h-10 rounded-full flex items-center justify-center text-white font-extrabold text-lg shadow-sm" 
-                style={{ background: BRAND.red }}
+                className="w-10 h-10 rounded-full bg-white flex items-center justify-center font-black text-xl shadow-md shrink-0 border-2"
+                style={{ borderColor: BRAND.red, color: BRAND.red }}
               >
                 G
               </div>
-              <div className="font-extrabold text-lg text-white" style={{ fontFamily: "Manrope, sans-serif" }}>
+              <div className="font-extrabold text-xl text-white tracking-tight" style={{ fontFamily: "Manrope, sans-serif" }}>
                 Gozak Shopping Mall
               </div>
             </div>
@@ -51,7 +51,7 @@ export function Footer() {
             <h5 className="text-white font-bold text-sm mb-4">Visit Us</h5>
             <p className="text-sm leading-loose text-white/50">
               No.1 Adenikpekun Close<br />Akure Garage Roundabout<br />Ondo Town, Ondo State<br /><br />
-              +234 814 600 8685<br />director@gozakonline.com
+              08146008685<br />director@gozakonline.com
             </p>
           </div>
         </div>
